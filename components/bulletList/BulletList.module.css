@@ -1,0 +1,7 @@
+.items__list {
+    flex-wrap: wrap;
+    display: flex;
+    gap: 20px;
+    align-content: center;
+    justify-content: center;
+}
