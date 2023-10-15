@@ -20,7 +20,7 @@ export default function Header({ }) {
                             <button className={css.header__btn}>Разместить объявление</button>
                             <button onClick={() => setAuth(false)} className={css.header__btn}>Выйти</button>
                         </div>
-                        : <div>
+                        : <div className={css.header__right}>
                             <button onClick={() => setShowRegistration(true)} className={css.header__btn}>Войти</button>
                         </div>
                     }

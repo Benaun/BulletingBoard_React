@@ -1,27 +1,43 @@
 const categories = [
     {
         "id": 1,
-        "name": "All"
+        "name": "Все",
+        "img": './images/Logo.svg'
     },
     {
         "id": 2,
-        "name": "Tech"
+        "name": "Техника",
+        "img": './images/Logo.svg'
     },
     {
         "id": 3,
-        "name": "Auto"
+        "name": "Транспорт",
+        "img": './images/Logo.svg'
     },
     {
         "id": 4,
-        "name": "Home"
+        "name": "Для дома",
+        "img": './images/Logo.svg'
     },
     {
         "id": 5,
-        "name": "Pets"
+        "name": "Для животных",
+        "img": './images/Logo.svg'
     },
     {
         "id": 6,
-        "name": "Garden"
+        "name": "Недвижимость",
+        "img": './images/Logo.svg'
+    },
+    {
+        "id": 7,
+        "name": "Услуги",
+        "img": './images/Logo.svg'
+    },
+    {
+        "id": 8,
+        "name": "Отдых",
+        "img": './images/Logo.svg'
     }
 ];
 
