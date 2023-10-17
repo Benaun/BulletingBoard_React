@@ -6,6 +6,7 @@ const bullets = [
         "email": "Sincere@april.biz",
         "phone": "1-770-736-8031",
         "description": "asdasssssdqweqgwdjhfjhklsdjkhf jdshfjsdhgfajkljkhfs",
+        "place": "Ставрополь"
     },
     {
         "id": 2,
@@ -14,6 +15,7 @@ const bullets = [
         "email": "Sincere@april.biz",
         "phone": "1-770-736-8031",
         "description": "asdasssssdqweqgwdjhfjhklsdjkhf jdshfjsdhgfajkljkhfs",
+        "place": "Ставрополь"
     },
     {
         "id": 3,
@@ -22,6 +24,7 @@ const bullets = [
         "email": "Sincere@april.biz",
         "phone": "1-770-736-8031",
         "description": "asdasssssdqweqgwdjhfjhklsdjkhf jdshfjsdhgfajkljkhfs",
+        "place": "Ставрополь"
     },
     {
         "id": 4,
@@ -30,6 +33,7 @@ const bullets = [
         "email": "Sincere@april.biz",
         "phone": "1-770-736-8031",
         "description": "asdasssssdqweqgwdjhfjhklsdjkhf jdshfjsdhgfajkljkhfs",
+        "place": "Ставрополь"
     },
     {
         "id": 5,
@@ -38,6 +42,7 @@ const bullets = [
         "email": "Sincere@april.biz",
         "phone": "1-770-736-8031",
         "description": "asdasssssdqweqgwdjhfjhklsdjkhf jdshfjsdhgfajkljkhfs",
+        "place": "Ставрополь"
     },
     {
         "id": 6,
@@ -46,6 +51,7 @@ const bullets = [
         "email": "Sincere@april.biz",
         "phone": "1-770-736-8031",
         "description": "asdasssssdqweqgwdjhfjhklsdjkhf jdshfjsdhgfajkljkhfs",
+        "place": "Ставрополь"
     },
     {
         "id": 7,
@@ -54,6 +60,7 @@ const bullets = [
         "email": "Sincere@april.biz",
         "phone": "1-770-736-8031",
         "description": "asdasssssdqweqgwdjhfjhklsdjkhf jdshfjsdhgfajkljkhfs",
+        "place": "Ставрополь"
     },
     {
         "id": 8,
@@ -62,6 +69,7 @@ const bullets = [
         "email": "Sincere@april.biz",
         "phone": "1-770-736-8031",
         "description": "asdasssssdqweqgwdjhfjhklsdjkhf jdshfjsdhgfajkljkhfs",
+        "place": "Ставрополь"
     },
     {
         "id": 9,
@@ -70,6 +78,7 @@ const bullets = [
         "email": "Sincere@april.biz",
         "phone": "1-770-736-8031",
         "description": "asdasssssdqweqgwdjhfjhklsdjkhf jdshfjsdhgfajkljkhfs",
+        "place": "Ставрополь"
     },
     {
         "id": 10,
@@ -78,6 +87,25 @@ const bullets = [
         "email": "Sincere@april.biz",
         "phone": "1-770-736-8031",
         "description": "asdasssssdqweqgwdjhfjhklsdjkhf jdshfjsdhgfajkljkhfs",
+        "place": "Ставрополь"
+    },
+    {
+        "id": 11,
+        "name": "Clementina DuBuque",
+        "price": "2500$",
+        "email": "Sincere@april.biz",
+        "phone": "1-770-736-8031",
+        "description": "asdasssssdqweqgwdjhfjhklsdjkhf jdshfjsdhgfajkljkhfs",
+        "place": "Ставрополь"
+    },
+    {
+        "id": 12,
+        "name": "Clementina DuBuque",
+        "price": "2500$",
+        "email": "Sincere@april.biz",
+        "phone": "1-770-736-8031",
+        "description": "asdasssssdqweqgwdjhfjhklsdjkhf jdshfjsdhgfajkljkhfs",
+        "place": "Ставрополь"
     }
 ];
 

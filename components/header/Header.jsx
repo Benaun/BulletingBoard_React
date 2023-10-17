@@ -17,6 +17,10 @@ export default function Header({ }) {
                     </div>
                     {auth
                         ? <div className={css.header__right}>
+                            <div className={css.header__user}>
+                                <span className={css.user__avatar}></span>
+                                <p className={css.user__name}>Admin</p>
+                            </div>
                             <button className={css.header__btn}>Разместить объявление</button>
                             <button onClick={() => setAuth(false)} className={css.header__btn}>Выйти</button>
                         </div>

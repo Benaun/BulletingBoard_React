@@ -1,5 +1,4 @@
 .item__card {
-    background: #232947;
     border-radius: 12px;
     width: 282px;
     margin-bottom: 26px;
@@ -9,8 +8,12 @@
 
 .item__img {
     border-radius: 12px;
-    max-width: 100%;
-    min-height: 399px;
+    width: 100%;
+    min-height: 150px;
+    background-image: url(../../assets/images/not.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
 }
 
 .item__description {
@@ -18,21 +21,27 @@
 }
 
 .item__title {
-    font-weight: 600;
-    font-size: 16px;
-    line-height: 24px;
+    font-weight: 900;
+    font-size: 20px;
     letter-spacing: 0.02em;
-    color: #fff;
+    color: #2392fa;
     max-width: 100%;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow-x: hidden;
-    margin-bottom: 8px;
 }
 
 .item__text {
-    font-weight: 400;
-    font-size: 15px;
+    font-weight: 500;
+    font-size: 18px;
     line-height: 24px;
     color: #767E94;
+}
+
+.item__price {
+    color: #222;
+}
+
+.item__info {
+    color: #afafaf;
 }

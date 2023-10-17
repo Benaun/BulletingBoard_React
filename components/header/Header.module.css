@@ -32,6 +32,24 @@
     gap: 20px;
 }
 
+.header__user {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.user__avatar {
+    background-image: url(../../assets/images/avatar.svg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+}
+
+.user__name {
+    font-size: 16px;
+}
+
 .header__btn {
     text-decoration: none;
     color: black;
