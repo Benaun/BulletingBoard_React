@@ -1,10 +1,10 @@
-import Board from "../components/board/Board";
+import BulletItemBig from "../components/bulletItem/BulletItemBig";
 import DefaultLayout from "../layouts/default";
 
 export default function Home() {
     return (
         <DefaultLayout>
-            <Board />
+            <BulletItemBig />
         </DefaultLayout>
     )
 }
