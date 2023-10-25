@@ -7,14 +7,21 @@
 }
 
 .item__img {
-    border-radius: 12px;
-    width: 100%;
-    min-height: 150px;
-    background-image: url(../../assets/images/not.jpg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
+    border-radius: 8px;
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
 }
+
+.item__img img {
+    height: 100%;
+    width: auto;
+}
+
 
 .item__description {
     padding: 12px 0;

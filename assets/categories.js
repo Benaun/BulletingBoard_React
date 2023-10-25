@@ -16,7 +16,7 @@ const categories = [
     },
     {
         "id": 4,
-        "name": "Для дома",
+        "name": "Мебель",
         "img": './images/Logo.svg'
     },
     {

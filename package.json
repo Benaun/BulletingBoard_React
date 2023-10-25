@@ -7,11 +7,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "serv": "npm run json-server --watch db.json --port 8000"
   },
   "author": "Andrey Kharitonov",
   "license": "ISC",
   "dependencies": {
+    "json-server": "^0.17.4",
     "next": "^13.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
