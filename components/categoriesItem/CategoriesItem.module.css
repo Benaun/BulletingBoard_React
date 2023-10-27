@@ -15,8 +15,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 25px;
+    overflow: hidden;
     margin: 0 auto;
+}
+
+.item__img img {
+    height: 30px;
+    width: auto;
 }
 
 .item__img:hover {

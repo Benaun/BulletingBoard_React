@@ -1,4 +1,3 @@
-import Link from "next/link";
 import BulletItem from "../bulletItem/BulletItem";
 import css from "./BulletList.module.css"
 

@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "serv": "npm run json-server --watch db.json --port 8000"
+    "serv": "json-server --watch db.json --port 8000"
   },
   "author": "Andrey Kharitonov",
   "license": "ISC",
