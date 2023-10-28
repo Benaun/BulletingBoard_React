@@ -1,0 +1,29 @@
+.container {
+    margin: 0 auto;
+    width: 1200px;
+}
+
+.form__add {
+    border: 1px solid #222;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form__add h2 {
+    font-size: 30px;
+}
+
+.form__add p {
+    font-size: 20px;
+}
+
+.form__add input {
+    width: 200px;
+}
+
+.form__add textarea {
+    height: 200px;
+    width: 300px;
+}

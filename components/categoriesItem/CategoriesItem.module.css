@@ -17,6 +17,8 @@
     align-items: center;
     overflow: hidden;
     margin: 0 auto;
+    border: none;
+    cursor: pointer;
 }
 
 .item__img img {

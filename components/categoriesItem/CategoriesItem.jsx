@@ -4,9 +4,9 @@ export default function CategoriesItem({ item }) {
     const { id, img, name } = item;
     return (
         <li key={id} className={css.item__card}>
-            <div className={css.item__img}>
+            <button className={css.item__img} data-action={name}>
                 <img src={img} alt={name} />
-            </div>
+            </button>
             <p className={css.item__title}>{name}</p>
         </li>
     )

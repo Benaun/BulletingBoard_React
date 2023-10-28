@@ -44,7 +44,7 @@ export default function Registration({ setShowRegistration, setAuth }) {
                 <form className={css.reg__form}>
                     <div className={css.reg__head}>
                         <button
-                            className={[css.reg__btn, css.reg__active].join(' ')}
+                            className={css.reg__btn}
                             type="button"
                             data-action='signIn'
                             onClick={() => setRegistration(true)}

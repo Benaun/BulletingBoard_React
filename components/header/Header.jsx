@@ -1,12 +1,13 @@
 import Link from 'next/link'
 import css from './Header.module.css'
 import Registration from '../registration/Registration'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { Context } from '../../context/context'
 
 export default function Header({ }) {
 
     const [showRegistration, setShowRegistration] = useState(false);
-    const [auth, setAuth] = useState(false);
+    const [auth, setAuth] = useContext(Context);
     return <>
         <header className={css.header}>
             <div className="container">
@@ -21,7 +22,9 @@ export default function Header({ }) {
                                 <span className={css.user__avatar}></span>
                                 <p className={css.user__name}>Admin</p>
                             </div>
-                            <button className={css.header__btn}>Разместить объявление</button>
+                            <Link href={'/newbullet'}>
+                                <button className={css.header__btn}>Разместить объявление</button>
+                            </Link>
                             <button onClick={() => setAuth(false)} className={css.header__btn}>Выйти</button>
                         </div>
                         : <div className={css.header__right}>

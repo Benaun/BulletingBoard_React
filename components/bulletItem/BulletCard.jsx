@@ -1,11 +1,12 @@
 import Link from "next/link"
-import css from "./BulletItem.module.css"
+import css from "./BulletItem.module.css";
 
-export default function BulletItemBig({item}) {
-    const {title, images, price, email, phone, description, address: {region, city, street}} = item;
+
+export default function BulletCard({ item }) {
+    const { title, images, price, email, phone, description, address: { region, city, street } } = item;
     return (
         <div className={css.container}>
-            <Link  className={css.link} href={'/'}>
+            <Link className={css.link} href={'/'}>
                 <h2>На главную</h2>
             </Link>
             <div className={css.content}>
@@ -35,7 +36,7 @@ export default function BulletItemBig({item}) {
                         <span>{phone}</span>
                     </button>
                     <button className={[css.right__btn, css.btn__blue].join(' ')}>
-                       <span>Написать сообщение</span><br />
+                        <span>Написать сообщение</span><br />
                         <span>{email}</span>
                     </button>
                 </div>
