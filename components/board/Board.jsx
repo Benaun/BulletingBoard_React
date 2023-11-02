@@ -11,7 +11,10 @@ const API = 'http://localhost:8000/bullets';
 export default function Board({ }) {
     const [searchValue, setSearchValue] = useState('');
     const [bullets, setBullets] = useState([]);
+    const [filterFunction, setfilterFunction] = useState(_ => a => true);
     const [error, setError] = useState(null);
+
+    console.log('filterFunction = ', filterFunction)
 
     useEffect(() => {
         async function getBullets() {
@@ -32,20 +35,19 @@ export default function Board({ }) {
         setSearchValue(value);
     };
 
-    const filtered = bullets.filter((bullet) =>
-        bullet.title.toLowerCase().includes(searchValue.toLowerCase())
+    const filtered = bullets
+    .filter(filterFunction)
+    .filter((bullet) =>bullet.title.toLowerCase().includes(searchValue.toLowerCase())
     );
 
     function onClick(evt) {
         const source = evt.target.closest('button[data-action]');
         if (source) {
             const { action, id } = source.dataset;
-            switch (action) {
-                case 'Все':
-                    break;
-                case 'Техника':
-                    setBullets(old => old.filter(el => el.category == 'Техника'))
-                    break;
+            if (action == "Все") {
+                setfilterFunction(_ => a => true) 
+            } else {
+                setfilterFunction(_ => el => el.category == action)
             }
         };
     };

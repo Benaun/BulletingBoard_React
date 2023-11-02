@@ -9,7 +9,6 @@ export default function BulletList({ items }) {
         <div className={css.items__list}>
             {items.map((item) => (
                 <BulletItem key={item.id} item={item} />
-
             ))}
         </div>
     )
