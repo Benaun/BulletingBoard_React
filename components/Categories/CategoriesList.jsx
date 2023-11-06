@@ -1,5 +1,5 @@
 import css from './CategoriesList.module.css'
-import CategoriesItem from '../categoriesItem/CategoriesItem'
+import CategoriesItem from './CategoriesItem'
 
 export default function CategoriesList({ items }) {
     return (

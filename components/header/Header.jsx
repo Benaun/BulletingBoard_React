@@ -1,41 +1,25 @@
 import Link from 'next/link'
 import css from './Header.module.css'
-import Registration from '../registration/Registration'
-import { useContext, useState } from 'react'
-import { Context } from '../../context/context'
+import SignIn from '@/components/SignIn/SignIn'
+import Image from 'next/image'
 
 export default function Header({ }) {
 
-    const [showRegistration, setShowRegistration] = useState(false);
-    const [auth, setAuth] = useContext(Context);
     return <>
         <header className={css.header}>
             <div className="container">
                 <div className={css.header__inner}>
                     <div className={css.header__left}>
-                        <Link className={css.header__logo} href='/'></Link>
+                        <Link className={css.header__logo} href='/'>
+                            <Image src={"/images/logo.svg"} alt='Logo' width={71} height={64}/>
+                        </Link>
                         <h2 className={css.header__text}>Доска бесплатных объявлений</h2>
                     </div>
-                    {auth
-                        ? <div className={css.header__right}>
-                            <div className={css.header__user}>
-                                <span className={css.user__avatar}></span>
-                                <p className={css.user__name}>Admin</p>
-                            </div>
-                            <Link href={'/newbullet'}>
-                                <button className={css.header__btn}>Разместить объявление</button>
-                            </Link>
-                            <button onClick={() => setAuth(false)} className={css.header__btn}>Выйти</button>
-                        </div>
-                        : <div className={css.header__right}>
-                            <button onClick={() => setShowRegistration(true)} className={css.header__btn}>Войти</button>
-                        </div>
-                    }
-
+                    <div className={css.header__right}>
+                        <SignIn />
+                    </div>
                 </div>
             </div>
-            {showRegistration && <Registration setShowRegistration={setShowRegistration} setAuth={setAuth} />}
-
         </header>
     </>
 }

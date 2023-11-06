@@ -1,5 +1,5 @@
 import css from './ProductForm.module.css';
-import categories from "../../assets/categories";
+import categories from "@/assets/categories";
 import Select from './Select';
 import { useForm } from 'react-hook-form';
 

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import css from "./BulletItem.module.css"
+import css from './BulletItem.module.css'
 
 export default function BulletItem({ item }) {
     const { id, title, price, images, address: { city } } = item;

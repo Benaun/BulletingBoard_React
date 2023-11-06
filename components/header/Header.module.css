@@ -14,9 +14,6 @@
 }
 
 .header__logo {
-    width: 71px;
-    height: 64px;
-    background-image: url(../../assets/images/Logo.svg);
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -30,32 +27,4 @@
     display: flex;
     align-items: center;
     gap: 20px;
-}
-
-.header__user {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.user__avatar {
-    background-image: url(../../assets/images/avatar.svg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 25px;
-    height: 25px;
-}
-
-.user__name {
-    font-size: 16px;
-}
-
-.header__btn {
-    text-decoration: none;
-    color: black;
-    background: #F9D44A;
-    border-radius: 10px;
-    padding: 10px 25px;
-    cursor: pointer;
-    border: none;
 }

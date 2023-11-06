@@ -1,20 +1,18 @@
-import BulletList from "../bulletList/BulltetList";
-import SearchBar from "../searchbar/SearchBar";
-import categories from '../../assets/categories'
+import BulletList from './BulletList';
+import SearchBar from '../searchbar/SearchBar';
+import categories from '@/assets/categories'
 
-import css from "./Board.module.css";
+import css from "./BulletBoard.module.css";
 import { useEffect, useState } from "react";
-import CategoriesList from "../categoriesList/CategoriesList";
+import CategoriesList from "../Categories/CategoriesList";
 
 const API = 'http://localhost:8000/bullets';
 
-export default function Board({ }) {
+export default function BulletBoard({ }) {
     const [searchValue, setSearchValue] = useState('');
     const [bullets, setBullets] = useState([]);
     const [filterFunction, setfilterFunction] = useState(_ => a => true);
     const [error, setError] = useState(null);
-
-    console.log('filterFunction = ', filterFunction)
 
     useEffect(() => {
         async function getBullets() {
@@ -29,7 +27,6 @@ export default function Board({ }) {
         }
         getBullets();
     }, []);
-    if (error) return <div>Ошибка: {error.message}</div>;
 
     const handleSearchValue = (value) => {
         setSearchValue(value);

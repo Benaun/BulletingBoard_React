@@ -1,6 +1,4 @@
-
-import BulletCard from "../bulletItem/BulletCard";
-import BulletItem from "../bulletItem/BulletItem";
+import BulletItem from "./BulletItem";
 import css from "./BulletList.module.css"
 
 

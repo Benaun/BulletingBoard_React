@@ -1,7 +1,7 @@
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react";
-import BulletCard from "../../components/bulletItem/BulletCard";
-import DefaultLayout from "../../layouts/default"
+import BulletCard from "@/components/BulletDetails/BulletCard";
+import DefaultLayout from "@/layouts/default"
 
 
 export default function Details() {
