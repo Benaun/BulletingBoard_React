@@ -1,7 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    // reactStrictMode: true,
-    // eslint: { ignoreDuringBuilds: true }, // eslint:disable
     images: {
         formats: ['image/avif', 'image/webp'],
         remotePatterns: [
@@ -11,9 +9,15 @@ const nextConfig = {
                 port: '',
                 pathname: '/u/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'lh3.googleusercontent.com',
+                port: '',
+                pathname: '/a/**',
+            }
         ],
     },
-    experimental: { esmExternals: true }, // Для правильного импорта SWR
+    experimental: { esmExternals: true },
 };
 
 module.exports = nextConfig;

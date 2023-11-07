@@ -8,6 +8,7 @@ export default function SignIn() {
     if ('loading' === status) {
         return <h2>Loading</h2>;
     }
+    console.log(session)
 
     if (session) {
         return <>

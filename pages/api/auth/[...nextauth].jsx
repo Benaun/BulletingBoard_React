@@ -2,11 +2,10 @@ import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
-import users from '@/assets/users';
+import getUsers from '@/assets/getusers';
 
 
 const authConfig = {
-
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID,
@@ -23,15 +22,16 @@ const authConfig = {
                 password: { label: 'password', type: 'password', required: true },
             },
             async authorize(credentials) {
-                
                 if (!credentials?.email || !credentials.password) return null;
+
+                const users = await getUsers();
 
                 const currentUser = users.find(user => user.email === credentials.email);
 
                 if (currentUser && currentUser.password === credentials.password) {
-                    const { password, ...userWithoutPassword} = currentUser;
+                    const { password, ...user} = currentUser;
 
-                    return userWithoutPassword
+                    return user
                 }
             }
         })

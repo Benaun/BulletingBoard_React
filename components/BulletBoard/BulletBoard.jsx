@@ -1,5 +1,5 @@
 import BulletList from './BulletList';
-import SearchBar from '../searchbar/SearchBar';
+import SearchBar from '../Searchbar/SearchBar';
 import categories from '@/assets/categories'
 
 import css from "./BulletBoard.module.css";
