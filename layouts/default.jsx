@@ -1,5 +1,5 @@
 import { Head } from "./head";
-import Header from "@/components/Header/Header"
+import Header from "./Header/Header"
 
 export default function DefaultLayout({ children }) {
 	return (
