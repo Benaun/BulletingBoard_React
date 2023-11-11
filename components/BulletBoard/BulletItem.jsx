@@ -3,7 +3,7 @@ import css from './BulletItem.module.css';
 import Card from 'react-bootstrap/Card';
 
 export default function BulletItem({ item }) {
-    const { id, title, price, images, address: { city } } = item;
+    const { id, title, price, images, city } = item;
     return (
         <Link href={`/bullet/${id}`}>
             <Card key={id} className={css.item__card}>

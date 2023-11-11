@@ -6,7 +6,7 @@ import Image from "next/image";
 
 export default function BulletCard({ item }) {
     const [visible, setVisible] = useState(false);
-    const { title, images, price, email, phone, description, address: { region, city, street } } = item;
+    const { title, images, price, email, phone, description, region, city, street } = item;
     return (
         <div className={css.container}>
             <div className={css.content}>

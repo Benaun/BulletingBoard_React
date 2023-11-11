@@ -1,9 +1,8 @@
 .items__list {
     width: 1320px;
     padding: 0 40px;
-    flex-wrap: wrap;
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
 }
