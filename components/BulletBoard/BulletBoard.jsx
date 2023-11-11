@@ -32,17 +32,18 @@ export default function BulletBoard({ }) {
         setSearchValue(value);
     };
 
+
     const filtered = bullets
-    .filter(filterFunction)
-    .filter((bullet) =>bullet.title.toLowerCase().includes(searchValue.toLowerCase())
-    );
+        .filter(filterFunction)
+        .filter((bullet) => bullet.title.toLowerCase().includes(searchValue.toLowerCase())
+        );
 
     function onClick(evt) {
         const source = evt.target.closest('button[data-action]');
         if (source) {
             const { action, id } = source.dataset;
             if (action == "Все") {
-                setfilterFunction(_ => a => true) 
+                setfilterFunction(_ => a => true)
             } else {
                 setfilterFunction(_ => el => el.category == action)
             }
@@ -51,10 +52,14 @@ export default function BulletBoard({ }) {
 
 
     return (
-        <main>
-            <div className={css.container} onClick={onClick}>
+        <main className={css.bullet__board}>
+            <div onClick={onClick}>
                 <div>
-                    <SearchBar searchValue={searchValue} onSearch={handleSearchValue} />
+                    <SearchBar
+                        searchValue={searchValue}
+                        onSearch={handleSearchValue}
+                        onClick={() => setSearchValue('')}
+                    />
                     <CategoriesList items={categories} />
                     <BulletList items={filtered} />
                 </div>

@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState } from 'react';
 import css from './CategoriesItem.module.css'
 
 export default function CategoriesItem({ item, active, onClick }) {

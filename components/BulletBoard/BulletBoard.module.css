@@ -1,9 +1,3 @@
-.container {
-    margin: 0 auto;
-    width: 1400px;
-    display: flex;
-    background-color: #fff;
-    align-items: center;
-    justify-content: center;
-    padding-top: 20px;
+.bullet__board {
+    padding-top: 40px;
 }

@@ -1,13 +1,3 @@
-.header__btn {
-    text-decoration: none;
-    color: black;
-    background: #F9D44A;
-    border-radius: 10px;
-    padding: 10px 25px;
-    cursor: pointer;
-    border: none;
-}
-
 .avatar {
     border: none;
     border-radius: 50%;

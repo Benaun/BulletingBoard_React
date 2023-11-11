@@ -151,7 +151,6 @@
       "id": 9,
       "title": "2-х комнатная квартира",
       "images": [
-        "https://pbs.twimg.com/media/EUrHDnQU8AE0OsU?format=jpg&name=900x900",
         "https://mykaleidoscope.ru/uploads/posts/2020-02/1581107193_51-p-dizain-intererov-dlya-dvukhkomnatnikh-kvar-91.jpg",
         "https://shkafytut.ru/wp-content/uploads/2017/09/104_1200x1029.jpg"
       ],
@@ -223,7 +222,6 @@
       "id": 13,
       "title": "Спа процедуры",
       "images": [
-        "https://vsegda-pomnim.com/uploads/posts/2023-03/1679015133_vsegda-pomnim-com-p-kamni-spa-foto-14.jpg",
         "https://azurka.ru/wp-content/uploads/2023/07/1-1.jpg",
         "https://shkola-krasoty.com/sites/default/files/com_img/Bkk7eauibhZmgfREYJeZV6QB5J43y.jpg"
       ],
@@ -256,25 +254,9 @@
         "city": "Астрахань",
         "street": "ул. Ленина"
       }
-    },
-    {
-      "title": "Ghbd",
-      "images": "",
-      "price": "12344",
-      "email": "123@mail.ru",
-      "phone": "+7-918-792-22-49",
-      "description": "adasdasdwqwe",
-      "category": "Мебель",
-      "id": 15,
-      "address": {
-        "region": "Астраханская область",
-        "city": "Астрахань",
-        "street": "ул. Ленина"
-      }
     }
   ],
-
-  "users" : [
+  "users": [
     {
       "id": 1,
       "email": "123@mail.ru",

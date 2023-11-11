@@ -1,3 +1,4 @@
+import Footer from "./Footer/Footer";
 import { Head } from "./head";
 import Header from "./Header/Header"
 
@@ -9,6 +10,7 @@ export default function DefaultLayout({ children }) {
 			<main className="container">
 				{children}
 			</main>
+			<Footer/>
 		</div>
 	);
 }

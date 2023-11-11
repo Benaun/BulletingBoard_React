@@ -1,6 +1,7 @@
 .container {
+    box-sizing: border-box;
     margin: 25px auto 0 auto;
-    padding: 0 70px;
+    padding-left: 20px;
     width: 1400px;
     height: auto;
 }
@@ -8,9 +9,10 @@
 .link {
     display: flex;
     justify-content: flex-end;
-    font-size: 14px;
+    font-size: 17px;
     color: rgb(30, 31, 22);
     cursor: pointer;
+    margin-left: 35px;
 }
 
 .content {

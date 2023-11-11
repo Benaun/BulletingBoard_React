@@ -1,7 +1,9 @@
 .items__list {
+    width: 1320px;
+    padding: 0 40px;
     flex-wrap: wrap;
     display: flex;
     gap: 20px;
-    align-content: center;
+    align-items: center;
     justify-content: center;
 }

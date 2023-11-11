@@ -9,9 +9,6 @@ export default function BulletCard({ item }) {
     const { title, images, price, email, phone, description, address: { region, city, street } } = item;
     return (
         <div className={css.container}>
-            <Link className={css.link} href={'/'}>
-                <h2>&lArr; На главную</h2>
-            </Link>
             <div className={css.content}>
                 <div className={css.left}>
 
@@ -19,7 +16,7 @@ export default function BulletCard({ item }) {
                     <div className={css.left__img}>
                         {images
                             ? <img src={images[0]} alt={title} />
-                            : <Image src={"/images/not.jpg"} alt="not" width={500} height={500}/>
+                            : <Image src={"/images/not.jpg"} alt="not" width={500} height={500} />
                         }
 
                     </div>
@@ -39,10 +36,10 @@ export default function BulletCard({ item }) {
                             <Image src={"/icons/delivery.svg"} alt="delivery" width={25} height={25} />
                         </span>Доставка компанией</p>
                         <p><span className={css.icon}>
-                        <Image src={"/icons/coins.svg"} alt="coins" width={25} height={25} />
+                            <Image src={"/icons/coins.svg"} alt="coins" width={25} height={25} />
                         </span>Оплата при получении</p>
                         <p><span className={css.icon}>
-                        <Image src={"/icons/back.svg"} alt="refund" width={25} height={25} />
+                            <Image src={"/icons/back.svg"} alt="refund" width={25} height={25} />
                         </span>Возврат денежных средств</p>
                     </div>
                     <button onClick={() => setVisible(true)} className={[css.right__btn, css.btn__green].join(' ')}>
@@ -55,6 +52,11 @@ export default function BulletCard({ item }) {
                         <span>Написать сообщение</span><br />
                         <span>{email}</span>
                     </button>
+                </div>
+                <div>
+                    <Link className={css.link} href={'/'}>
+                        <p>&lArr; На главную</p>
+                    </Link>
                 </div>
             </div>
         </div>

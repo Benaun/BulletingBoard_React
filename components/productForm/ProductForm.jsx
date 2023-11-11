@@ -16,7 +16,6 @@ export default function ProductForm() {
                 if (!res.ok) {
                     throw (new Error(res.status + ' ' + res.statusText));
                 }
-                alert('All good');
                 reset();
             });
     }
