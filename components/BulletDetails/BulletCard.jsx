@@ -2,10 +2,12 @@ import Link from "next/link"
 import css from "./BulletCard.module.css";
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 
 export default function BulletCard({ item }) {
     const [visible, setVisible] = useState(false);
+    const router = useRouter();
     const { title, images, price, email, phone, description, region, city, street } = item;
     return (
         <div className={css.container}>
@@ -54,9 +56,7 @@ export default function BulletCard({ item }) {
                     </button>
                 </div>
                 <div>
-                    <Link className={css.link} href={'/'}>
-                        <p>&lArr; На главную</p>
-                    </Link>
+                    <button className={css.back__btn} onClick={() => router.back()}>&lArr; Назад</button>
                 </div>
             </div>
         </div>

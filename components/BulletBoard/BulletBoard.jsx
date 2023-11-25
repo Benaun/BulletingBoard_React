@@ -5,6 +5,7 @@ import categories from '@/assets/categories'
 import css from "./BulletBoard.module.css";
 import { useEffect, useState } from "react";
 import CategoriesList from "../Categories/CategoriesList";
+import HeartBtn from '../UI/HeartBtn';
 
 const API = 'http://localhost:8000/bullets';
 
@@ -61,7 +62,9 @@ export default function BulletBoard({ }) {
                         onClick={() => setSearchValue('')}
                     />
                     <CategoriesList items={categories} />
-                    <BulletList items={filtered} />
+                    <BulletList items={filtered}>
+                        <HeartBtn width={20} height={20} fill={"gray"}/>
+                    </BulletList>
                 </div>
             </div>
         </main>

@@ -1,0 +1,18 @@
+.profile__board {
+    width: 1320px;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    justify-content: flex-start;
+}
+
+.profile__tab {
+    width: 1320px;
+    margin-bottom: 20px;
+    padding-left: 40px;
+    border: none;
+}
+
+.profile__text {
+    padding-left: 40px;
+}

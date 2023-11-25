@@ -13,7 +13,7 @@ a {
 
 body {
     background-color: #B4BCC4;
-    min-height: 100vh;
+    height: 100%;
 }
 
 .container {
@@ -30,4 +30,9 @@ body {
     border: 1px solid #b4adad;
     background-color: #e9eef3;
 }
+
+.nav-link {
+    color: #222;
+}
+
 

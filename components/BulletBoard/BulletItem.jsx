@@ -2,7 +2,7 @@ import Link from "next/link";
 import css from './BulletItem.module.css';
 import Card from 'react-bootstrap/Card';
 
-export default function BulletItem({ item }) {
+export default function BulletItem({ item, children}) {
     const { id, title, price, images, city } = item;
     return (
         <Link href={`/bullet/${id}`}>
@@ -18,8 +18,9 @@ export default function BulletItem({ item }) {
                     <Card.Text className={css.item__text}>
                         {price ? price : "Цена не указана"} &#8381;
                     </Card.Text >
-                    <Card.Text className={css.item__price}>
+                    <Card.Text className={css.item__text}>
                         {city ? city : "Не указан"}
+                        {children}
                     </Card.Text>
                 </Card.Body>
             </Card>

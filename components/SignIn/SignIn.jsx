@@ -8,9 +8,8 @@ import css from './SignIn.module.css'
 export default function SignIn() {
     const { data: session, status } = useSession();
     if ('loading' === status) {
-        return <Spiner/>;
+        return <Spiner />;
     }
-    console.log(session)
 
     if (session) {
         return <>
@@ -23,13 +22,14 @@ export default function SignIn() {
                     alt="ava"
                 />
             </Link>
-
-            <Link href={'/addBullet'}>
-                <Button variant="warning">
-                    Разместить объявление
-                </Button>
-            </Link>
-
+            {session.user.email === "admin@mail.ru"
+                ? <div></div>
+                : <Link href={'/addBullet'}>
+                    <Button variant="warning">
+                        Разместить объявление
+                    </Button>
+                </Link>
+            }
             <Link href={"#"} onClick={() => signOut({ callbackUrl: "/" })}>
                 <Button variant="warning">
                     Выйти
