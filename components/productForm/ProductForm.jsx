@@ -1,6 +1,7 @@
 import css from './ProductForm.module.css';
 import categories from "@/assets/categories";
 import Select from './Select';
+import ToastNotification from '../Toast/Toast';
 import { useForm } from 'react-hook-form';
 import { useSession } from 'next-auth/react';
 import { InputGroup, Form, Button } from 'react-bootstrap';
@@ -16,6 +17,7 @@ export default function ProductForm() {
             body: JSON.stringify({
                 id: Math.random(),
                 owner: session.user.email,
+                email:session.user.email,
                 ...data
             })
         })
@@ -23,6 +25,7 @@ export default function ProductForm() {
                 if (!res.ok) {
                     throw (new Error(res.status + ' ' + res.statusText));
                 }
+                <ToastNotification text={"Объявление создано"}/>
                 reset();
             });
     }
@@ -61,24 +64,15 @@ export default function ProductForm() {
                                     aria-describedby="inputGroup-sizing-default"
                                 />
                             </InputGroup>
-                            <InputGroup className="mb-3">
-                                <InputGroup.Text id="inputGroup-sizing-default">
-                                    Почта<span style={{ color: "red" }}>*</span>
-                                </InputGroup.Text>
-                                <Form.Control
-                                    required {...register('email')}
-                                    type="email"
-                                    aria-describedby="inputGroup-sizing-default"
-                                />
-                            </InputGroup>
+                            <Select required register={register} list={categories} formKey={'category'} />
                         </div>
                         <div className={css.content__column2}>
                             <InputGroup className="mb-3">
                                 <InputGroup.Text id="inputGroup-sizing-default">
-                                    Телефон<span style={{ color: "red" }}>*</span>
+                                    Телефон
                                 </InputGroup.Text>
                                 <Form.Control
-                                    required {...register('phone')}
+                                    {...register('phone')}
                                     aria-describedby="inputGroup-sizing-default"
                                 />
                             </InputGroup>
@@ -102,16 +96,15 @@ export default function ProductForm() {
                             </InputGroup>
                             <InputGroup className="mb-3">
                                 <InputGroup.Text id="inputGroup-sizing-default">
-                                    Улица<span style={{ color: "red" }}>*</span>
+                                    Улица
                                 </InputGroup.Text>
                                 <Form.Control
-                                    required {...register('street')}
+                                    {...register('street')}
                                     aria-describedby="inputGroup-sizing-default"
                                 />
                             </InputGroup>
                         </div>
                         <div className={css.content__column3}>
-                            <Select required register={register} list={categories} formKey={'category'} />
                             <Form.Control
                             className={css.form__textarea}
                                 placeholder='Краткое описание товара'

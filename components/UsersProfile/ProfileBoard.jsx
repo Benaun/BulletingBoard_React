@@ -4,8 +4,6 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import BulletList from '../BulletBoard/BulletList';
 import { useSession } from 'next-auth/react';
-import DelBtn from '../UI/DelBtn';
-import HeartBtn from '../UI/HeartBtn';
 
 export default function ProfileBoard() {
     const { data: session } = useSession();
@@ -27,6 +25,7 @@ export default function ProfileBoard() {
         getBullets();
     }, [])
 
+    
     const filtered = bullets.filter((bullet) => bullet.owner === session?.user.email);
 
     return (
@@ -40,18 +39,14 @@ export default function ProfileBoard() {
                 >
                     <Tab eventKey="bullets" title="Мои объявления">
                         {filtered.length
-                            ? <BulletList items={filtered}>
-                                <DelBtn height={20} width={20} fill={"#eb1313"} />
-                            </BulletList>
+                            ? <BulletList items={filtered} />
                             : <h2 className={css.profile__text}>Нет объявлений</h2>
                         }
 
                     </Tab>
                     <Tab eventKey="favorites" title="Избранное">
                         {!filtered.length
-                            ? <BulletList items={filtered}>
-                                <HeartBtn height={20} width={20} fill={"#eb1313"} />
-                            </BulletList>
+                            ? <BulletList items={filtered}/>
                             : <h2 className={css.profile__text}>Нет избранных</h2>
                         }
                     </Tab>

@@ -13,22 +13,32 @@ export default function SignIn() {
 
     if (session) {
         return <>
-            <Link href={"/profile"}>
-                <Image
-                    src={session?.user?.image || '/images/avatar.svg'}
-                    width={40}
-                    height={40}
-                    className={css.avatar}
-                    alt="ava"
-                />
-            </Link>
             {session.user.email === "admin@mail.ru"
-                ? <div></div>
-                : <Link href={'/addBullet'}>
-                    <Button variant="warning">
-                        Разместить объявление
-                    </Button>
+                ? <Link href={"/controlPanel"}>
+                    <Image
+                        src={'/images/crown.svg'}
+                        width={40}
+                        height={40}
+                        className={css.avatar}
+                        alt="ava"
+                    />
                 </Link>
+                : <div>
+                    <Link href={"/profile"}>
+                        <Image
+                            src={session?.user?.image || '/images/avatar.svg'}
+                            width={40}
+                            height={40}
+                            className={css.avatar}
+                            alt="ava"
+                        />
+                    </Link>
+                    <Link href={'/addBullet'}>
+                        <Button variant="warning">
+                            Разместить объявление
+                        </Button>
+                    </Link>
+                </div>
             }
             <Link href={"#"} onClick={() => signOut({ callbackUrl: "/" })}>
                 <Button variant="warning">

@@ -1,0 +1,9 @@
+.btn {
+    position: absolute;
+    z-index: 10;
+    bottom: 4%;
+    right: 6%;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+}

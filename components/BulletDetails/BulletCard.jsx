@@ -1,4 +1,3 @@
-import Link from "next/link"
 import css from "./BulletCard.module.css";
 import { useState } from "react";
 import Image from "next/image";
@@ -56,7 +55,7 @@ export default function BulletCard({ item }) {
                     </button>
                 </div>
                 <div>
-                    <button className={css.back__btn} onClick={() => router.back()}>&lArr; Назад</button>
+                    <button className={css.back__btn} onClick={() => router.back()}>&lArr;</button>
                 </div>
             </div>
         </div>

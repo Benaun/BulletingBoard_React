@@ -1,12 +1,11 @@
 .item__card {
+    position: relative;
     border-radius: 12px;
     max-width: 282px;
     padding: 15px 15px 0 15px;
 }
 
 .item__img {
-    padding-left: 5px;
-    border-radius: 8px;
     width: 250px;
     height: 250px;
     overflow: hidden;
@@ -17,10 +16,12 @@
 }
 
 .item__img img {
+    border-radius: 8px;
     height: 100%;
-    width: auto;
+    width: 100%;
 }
 .not__img {
+    border-radius: 8px;
     width: 250px;
     height: 250px;
     background-color: #abb1be;

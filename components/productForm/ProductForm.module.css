@@ -1,13 +1,8 @@
-.container {
-    margin: 0 auto;
-    width: 1200px;
-}
-
 .main {
     padding-top: 40px;
-    align-items: center;
     display: flex;
     text-align: center;
+    height: 770px;
 }
 
 .form__content {
@@ -29,9 +24,11 @@
 
 .content__column1 {
     grid-area: a;
+    height: 100%;
 }
 .content__column2 {
     grid-area: b;
+    height: 100%;
 }
 .content__column3 {
     display: flex;
@@ -39,4 +36,13 @@
     flex-direction: column;
     align-items: center;
     grid-area: c;
+}
+
+.select {
+    width: 100%;
+    padding: 6px 4px;
+}
+
+.form__textarea {
+    height: 380px;
 }
