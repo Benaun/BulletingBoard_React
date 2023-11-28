@@ -18,7 +18,7 @@ const authConfig = {
         Credentials({
             name: "",
             credentials: {
-                email: { label: 'email', type: 'email', required: true },
+                email: { label: 'email', type: 'text', required: true },
                 password: { label: 'password', type: 'password', required: true },
             },
             async authorize(credentials) {
@@ -29,13 +29,26 @@ const authConfig = {
                 const currentUser = users.find(user => user.email === credentials.email);
 
                 if (currentUser && currentUser.password === credentials.password) {
-                    const { password, ...user} = currentUser;
-
-                    return user
+                    return currentUser
                 }
             }
         })
     ],
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token.role = user.role
+            }
+            return token;
+        },
+        async session({ session, token }) {
+            if (token && session.user) {
+                session.user.id = token.sub;
+                session.user.role = token.role;
+            }
+            return session;
+        },
+    },
 };
 
 

@@ -12,8 +12,9 @@ export default function SignIn() {
     }
 
     if (session) {
+        console.log(session)
         return <>
-            {session.user.email === "admin@mail.ru"
+            {session.user.role === "admin"
                 ? <Link href={"/controlPanel"}>
                     <Image
                         src={'/images/crown.svg'}

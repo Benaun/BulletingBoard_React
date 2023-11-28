@@ -16,8 +16,8 @@ export default function ProductForm() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 id: Math.random(),
-                owner: session.user.email,
-                email:session.user.email,
+                owner: session.user.id,
+                email: session.user.email,
                 ...data
             })
         })
