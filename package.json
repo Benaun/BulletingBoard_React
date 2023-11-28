@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "fix": "pnpm eslint --fix \"./**/*.{js,jsx,ts,tsx}\"",
+    "fix": "npm eslint --fix \"./**/*.{js,jsx,ts,tsx}\"",
     "json-server": "json-server --watch db.json --port 8000",
     "serv": "concurrently \"npm run dev\" \"npm run json-server\"",
     "prod": "concurrently \"npm run build\" \"npm run json-server\""
@@ -27,9 +27,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.47.0",
-    "tailwind-variants": "^0.1.18",
-    "tailwindcss": "3.3.3"
+    "react-hook-form": "^7.47.0"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
