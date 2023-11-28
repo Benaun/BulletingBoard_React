@@ -42,7 +42,8 @@ export default function ProductForm() {
                                     Название<span style={{ color: "red" }}>*</span>
                                 </InputGroup.Text>
                                 <Form.Control
-                                    required {...register('title')}
+                                    required 
+                                    {...register('title')}
                                     aria-describedby="inputGroup-sizing-default"
                                 />
                             </InputGroup>
@@ -60,7 +61,8 @@ export default function ProductForm() {
                                     Цена<span style={{ color: "red" }}>*</span>
                                 </InputGroup.Text>
                                 <Form.Control
-                                    required {...register('price')}
+                                    required 
+                                    {...register('price')}
                                     aria-describedby="inputGroup-sizing-default"
                                 />
                             </InputGroup>
@@ -81,7 +83,8 @@ export default function ProductForm() {
                                     Регион<span style={{ color: "red" }}>*</span>
                                 </InputGroup.Text>
                                 <Form.Control
-                                    required {...register('region')}
+                                    required 
+                                    {...register('region')}
                                     aria-describedby="inputGroup-sizing-default"
                                 />
                             </InputGroup>
@@ -90,7 +93,8 @@ export default function ProductForm() {
                                     Город<span style={{ color: "red" }}>*</span>
                                 </InputGroup.Text>
                                 <Form.Control
-                                    required {...register('city')}
+                                    required 
+                                    {...register('city')}
                                     aria-describedby="inputGroup-sizing-default"
                                 />
                             </InputGroup>
