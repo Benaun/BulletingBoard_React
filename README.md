@@ -22,7 +22,7 @@
   GITHUB_SECRET= "ВАШ GITHUB_SECRET"
 
   NEXTAUTH_SECRET= "Здесь может быть любое пароль"
-  NEXTAUTH_URL= <span style="color: green">"http://localhost: НОМЕР ПОРТА ВАШЕГО ЛОКАЛЬНОГО СЕРВЕРА"</span>
+  NEXTAUTH_URL= $\mathfrak{\color{lime}{"http://localhost: НОМЕР ПОРТА ВАШЕГО ЛОКАЛЬНОГО СЕРВЕРА"}}$
   ```
 
 ## RUN
