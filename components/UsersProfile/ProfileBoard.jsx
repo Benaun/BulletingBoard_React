@@ -1,35 +1,47 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import css from './ProfileBoard.module.css';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import BulletList from '../BulletBoard/BulletList';
-import { useSession } from 'next-auth/react';
+import UserBullets from './UserBullets';
+import FavoritesBullets from './FavoriteBullets';
+import toast from 'react-hot-toast';
 
 export default function ProfileBoard() {
-    const { data: session } = useSession();
     const [key, setKey] = useState('bullets');
-    const [bullets, setBullets] = useState([]);
-    const [error, setError] = useState(null);
+    const [isLiked, setIsliked] = useState(true);
 
-    useEffect(() => {
-        async function getBullets() {
-            try {
-                const response = await fetch('http://localhost:8000/bullets');
-                if (!response.ok) throw new Error('fetch ' + response.status);
-                setBullets(await response.json());
-                setError(null);
-            } catch (err) {
-                setError(err)
+    async function onClick(evt) {
+        const source = evt.target.closest('button[data-action]');
+        if (source) {
+            const { action, id } = source.dataset;
+
+            if (action == "delete") {
+                return fetch(`http://localhost:8000/bullets/${id}`,
+                    { method: "DELETE" })
+                    .then(async res => {
+                        if (!res.ok) {
+                            throw (new Error(res.status + ' ' + res.statusText));
+                        }
+                        toast.success("Объявление удалено!")
+                    });
+            }
+            if (action == "like") {
+                if (isLiked) {
+                    return fetch(`http://localhost:8000/favorites/${id}`, 
+                    { method: "DELETE"})
+                    .then(async res => {
+                        if (!res.ok) {
+                            throw (new Error(res.status + ' ' + res.statusText));
+                        }
+                        toast.success("Удалено из избранного избранное!")
+                    });
+                }
             }
         }
-        getBullets();
-    }, [])
-
-    
-    const filtered = bullets.filter((bullet) => bullet.owner === session?.user.email);
+    };
 
     return (
-        <div className='container'>
+        <div className='container' onClick={onClick}>
             <main className={css.profile__board}>
                 <Tabs
                     id="tabs"
@@ -38,17 +50,10 @@ export default function ProfileBoard() {
                     className={css.profile__tab}
                 >
                     <Tab eventKey="bullets" title="Мои объявления">
-                        {filtered.length
-                            ? <BulletList items={filtered} />
-                            : <h2 className={css.profile__text}>Нет объявлений</h2>
-                        }
-
+                        <UserBullets />
                     </Tab>
                     <Tab eventKey="favorites" title="Избранное">
-                        {!filtered.length
-                            ? <BulletList items={filtered}/>
-                            : <h2 className={css.profile__text}>Нет избранных</h2>
-                        }
+                        <FavoritesBullets />
                     </Tab>
                 </Tabs>
             </main>

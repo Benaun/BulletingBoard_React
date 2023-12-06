@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 export default function BulletCard({ item }) {
     const [visible, setVisible] = useState(false);
     const router = useRouter();
-    const { title, images, price, email, phone, description, region, city, street } = item;
+    const { title, image, price, email, phone, description, region, city, street } = item;
     return (
         <div className={css.container}>
             <div className={css.content}>
@@ -15,8 +15,8 @@ export default function BulletCard({ item }) {
 
                     <h2 className={css.left__title}>{title}</h2>
                     <div className={css.left__img}>
-                        {images
-                            ? <img src={images[0]} alt={title} />
+                        {image
+                            ? <img src={image} alt={title} />
                             : <Image src={"/images/not.jpg"} alt="not" width={500} height={500} />
                         }
 

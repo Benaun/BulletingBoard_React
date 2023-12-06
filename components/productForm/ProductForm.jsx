@@ -1,7 +1,6 @@
 import css from './ProductForm.module.css';
 import categories from "@/assets/categories";
 import Select from './Select';
-import ToastNotification from '../Toast/Toast';
 import { useForm } from 'react-hook-form';
 import { useSession } from 'next-auth/react';
 import { InputGroup, Form, Button } from 'react-bootstrap';
@@ -25,8 +24,8 @@ export default function ProductForm() {
                 if (!res.ok) {
                     throw (new Error(res.status + ' ' + res.statusText));
                 }
-                <ToastNotification text={"Объявление создано"}/>
                 reset();
+                alert("Размещено")
             });
     }
 

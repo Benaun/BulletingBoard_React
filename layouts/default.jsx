@@ -1,3 +1,4 @@
+
 import Footer from "./Footer/Footer";
 import { Head } from "./head";
 import Header from "./Header/Header"
