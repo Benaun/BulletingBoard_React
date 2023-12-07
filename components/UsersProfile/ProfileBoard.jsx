@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import css from './ProfileBoard.module.css';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import UserBullets from './UserBullets';
 import FavoritesBullets from './FavoriteBullets';
 import toast from 'react-hot-toast';
+import { Container } from 'react-bootstrap';
 
 export default function ProfileBoard() {
     const [key, setKey] = useState('bullets');
@@ -16,38 +16,55 @@ export default function ProfileBoard() {
             const { action, id } = source.dataset;
 
             if (action == "delete") {
-                return fetch(`http://localhost:8000/bullets/${id}`,
-                    { method: "DELETE" })
-                    .then(async res => {
-                        if (!res.ok) {
-                            throw (new Error(res.status + ' ' + res.statusText));
-                        }
-                        toast.success("Объявление удалено!")
-                    });
+                try {
+                    const response = await fetch(`http://localhost:8000/bullets/${id}`,
+                    {method: "DELETE"});
+                    if (!response.ok) throw new Error('fetch ' + response.status);
+                    toast.success("Объявление удалено!")
+                    return await response.json();
+                } catch (error) {
+                    toast.error("Возникла проблема с вашим fetch запросом: ", error.message);
+                }
+                // return fetch(`http://localhost:8000/bullets/${id}`,
+                //     { method: "DELETE" })
+                //     .then(async res => {
+                //         if (!res.ok) {
+                //             throw (new Error(res.status + ' ' + res.statusText));
+                //         }
+                //         toast.success("Объявление удалено!")
+                //     });
             }
             if (action == "like") {
                 if (isLiked) {
-                    return fetch(`http://localhost:8000/favorites/${id}`, 
-                    { method: "DELETE"})
-                    .then(async res => {
-                        if (!res.ok) {
-                            throw (new Error(res.status + ' ' + res.statusText));
-                        }
+                    try {
+                        const response = await fetch(`http://localhost:8000/favorites/${id}`,
+                        {method: "DELETE"});
+                        if (!response.ok) throw new Error('fetch ' + response.status);
                         toast.success("Удалено из избранного избранное!")
-                    });
+                        return await response.json();
+                    } catch (error) {
+                        toast.error("Возникла проблема с вашим fetch запросом: ", error.message);
+                    }
+                    // return fetch(`http://localhost:8000/favorites/${id}`, 
+                    // { method: "DELETE"})
+                    // .then(async res => {
+                    //     if (!res.ok) {
+                    //         throw (new Error(res.status + ' ' + res.statusText));
+                    //     }
+                    //     toast.success("Удалено из избранного избранное!")
+                    // });
                 }
             }
         }
     };
 
     return (
-        <div className='container' onClick={onClick}>
-            <main className={css.profile__board}>
+        <Container fluid className='mt-4' onClick={onClick}>
+            <main>
                 <Tabs
                     id="tabs"
                     activeKey={key}
                     onSelect={(k) => setKey(k)}
-                    className={css.profile__tab}
                 >
                     <Tab eventKey="bullets" title="Мои объявления">
                         <UserBullets />
@@ -57,6 +74,6 @@ export default function ProfileBoard() {
                     </Tab>
                 </Tabs>
             </main>
-        </div>
+        </Container>
     );
 }

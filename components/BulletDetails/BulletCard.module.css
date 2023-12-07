@@ -1,37 +1,4 @@
-.container {
-    box-sizing: border-box;
-    margin: 25px auto 0 auto;
-    padding-left: 20px;
-    width: 1400px;
-    height: auto;
-}
 
-.link {
-    display: flex;
-    justify-content: flex-end;
-    font-size: 17px;
-    color: rgb(30, 31, 22);
-    cursor: pointer;
-    margin-left: 35px;
-}
-
-.content {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-}
-
-.left {
-    max-width: 50%;
-    display: flex;
-    flex-direction: column;
-}
-
-.left__link {
-    color: #767E94;
-    font-size: 15px;
-}
 
 .left__title {
     font-size: 30px;
@@ -64,13 +31,6 @@
     margin-bottom: 15px;
 }
 
-
-.right {
-    max-width: 30%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
 
 .right__price {
     font-size: 30px;
@@ -127,13 +87,3 @@
     background-size: cover;
 }
 
-.back__btn {
-    position: absolute;
-    top: 0;
-    right: 3%;
-    background: none;
-    border: none;
-    color: #222;
-    font-size: 20px;
-    margin-left: 65px;
-}

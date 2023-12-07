@@ -1,5 +1,4 @@
 import BulletList from '../BulletBoard/BulletList';
-import css from './ProfileBoard.module.css';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
@@ -27,7 +26,7 @@ export default function FavoritesBullets () {
     return <>
         {filtered.length
             ? <BulletList items={filtered} />
-            : <h2 className={css.profile__text}>Нет объявлений</h2>
+            : <h2 style={{margin: "20px 0"}}>Нет объявлений</h2>
         }
     </>
 }

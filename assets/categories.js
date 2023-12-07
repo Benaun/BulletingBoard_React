@@ -21,7 +21,7 @@ const categories = [
     },
     {
         "id": 5,
-        "name": "Для животных",
+        "name": "Животные",
         "img": 'https://cdn.icon-icons.com/icons2/1369/PNG/512/-pets_90407.png'
     },
     {

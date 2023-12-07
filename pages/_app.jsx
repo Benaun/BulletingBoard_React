@@ -1,4 +1,5 @@
 import { NextUIProvider } from '@nextui-org/react';
+import ThemeProvider from 'react-bootstrap/ThemeProvider'
 import { SessionProvider } from 'next-auth/react';
 import { Toaster } from "react-hot-toast";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -10,7 +11,9 @@ export default function MyApp({
   return (
     <SessionProvider session={session}>
       <NextUIProvider>
-        <Component {...pageProps} />
+        <ThemeProvider breakpoints={['xl', 'lg', 'md', 'sm', 'xs']}>
+          <Component {...pageProps} />
+        </ThemeProvider>
       </NextUIProvider>
       <Toaster position='bottom-right' />
     </SessionProvider>

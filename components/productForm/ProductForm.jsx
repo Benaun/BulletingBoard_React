@@ -1,6 +1,6 @@
 import css from './ProductForm.module.css';
 import categories from "@/assets/categories";
-import Select from './Select';
+import Select from '../UI/Select';
 import { useForm } from 'react-hook-form';
 import { useSession } from 'next-auth/react';
 import { InputGroup, Form, Button } from 'react-bootstrap';
@@ -14,7 +14,7 @@ export default function ProductForm() {
             method: "post",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                id: Math.random(),
+                id: Math.round(Math.random() * 100),
                 owner: session.user.id,
                 email: session.user.email,
                 ...data
@@ -41,7 +41,7 @@ export default function ProductForm() {
                                     Название<span style={{ color: "red" }}>*</span>
                                 </InputGroup.Text>
                                 <Form.Control
-                                    required 
+                                    required
                                     {...register('title')}
                                     aria-describedby="inputGroup-sizing-default"
                                 />
@@ -60,7 +60,7 @@ export default function ProductForm() {
                                     Цена<span style={{ color: "red" }}>*</span>
                                 </InputGroup.Text>
                                 <Form.Control
-                                    required 
+                                    required
                                     {...register('price')}
                                     aria-describedby="inputGroup-sizing-default"
                                 />
@@ -82,7 +82,7 @@ export default function ProductForm() {
                                     Регион<span style={{ color: "red" }}>*</span>
                                 </InputGroup.Text>
                                 <Form.Control
-                                    required 
+                                    required
                                     {...register('region')}
                                     aria-describedby="inputGroup-sizing-default"
                                 />
@@ -92,7 +92,7 @@ export default function ProductForm() {
                                     Город<span style={{ color: "red" }}>*</span>
                                 </InputGroup.Text>
                                 <Form.Control
-                                    required 
+                                    required
                                     {...register('city')}
                                     aria-describedby="inputGroup-sizing-default"
                                 />
@@ -109,7 +109,7 @@ export default function ProductForm() {
                         </div>
                         <div className={css.content__column3}>
                             <Form.Control
-                            className={css.form__textarea}
+                                className={css.form__textarea}
                                 placeholder='Краткое описание товара'
                                 required {...register('description')}
                                 aria-describedby="inputGroup-sizing-default"

@@ -1,7 +1,7 @@
 import Image from 'react-bootstrap/Image';
-import css from './ProfileHeader.module.css'
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
+import { Container } from 'react-bootstrap';
 
 
 
@@ -31,18 +31,22 @@ export default function ProfileHeader() {
     });
 
     return (
-        <div className="container">
-            <div className={css.header__wrapper}>
+        <Container fluid className='mt-3 mb-3'>
+            <div style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "30px",
+            }}>
                 <Image
                     src={session?.user.image || '/images/avatar.svg'}
-                    width={80}
-                    height={80}
+                    width={50}
+                    height={50}
                     roundedCircle
                     alt="avatar"
                 />
-                <h2>{currentUser[0]?.name || session?.user.email}</h2>
-                <h2>{currentUser[0]?.email}</h2>
+                <h3>{currentUser[0]?.name || session?.user.email}</h3>
+                <h3>{currentUser[0]?.email}</h3>
             </div>
-        </div>
+        </Container>
     )
 }

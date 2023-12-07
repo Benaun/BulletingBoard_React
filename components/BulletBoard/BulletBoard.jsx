@@ -1,12 +1,11 @@
 import BulletList from './BulletList';
-import SearchBar from '../Searchbar/SearchBar';
+import SearchBar from '../UI/SearchBar';
 import categories from '@/assets/categories'
-import css from "./BulletBoard.module.css";
 import CategoriesList from "../Categories/CategoriesList";
-
+import toast from 'react-hot-toast';
 import { useEffect, useState } from "react";
 import { useSession } from 'next-auth/react';
-import toast from 'react-hot-toast';
+import { Container } from 'react-bootstrap';
 
 const API = 'http://localhost:8000/bullets/';
 
@@ -47,7 +46,7 @@ export default function BulletBoard() {
             const { action, id } = source.dataset;
 
             if (action == "delete") {
-                return fetch(API + id, 
+                return fetch(API + id,
                     { method: "DELETE" })
                     .then(async res => {
                         if (!res.ok) {
@@ -76,14 +75,14 @@ export default function BulletBoard() {
                             setIsliked(!isLiked)
                         });
                 } else {
-                    return fetch(`http://localhost:8000/favorites/${currentBullet}`, 
-                    { method: "DELETE"})
-                    .then(async res => {
-                        if (!res.ok) {
-                            throw (new Error(res.status + ' ' + res.statusText));
-                        }
-                        toast.success("Удалено из избранного избранное!")
-                    });
+                    return fetch(`http://localhost:8000/favorites/${currentBullet}`,
+                        { method: "DELETE" })
+                        .then(async res => {
+                            if (!res.ok) {
+                                throw (new Error(res.status + ' ' + res.statusText));
+                            }
+                            toast.success("Удалено из избранного избранное!")
+                        });
                 }
 
             }
@@ -97,19 +96,21 @@ export default function BulletBoard() {
     };
 
     return (
-        <main className={css.bullet__board}>
-            <div onClick={onClick}>
-                <div>
-                    <SearchBar
-                        searchValue={searchValue}
-                        onSearch={handleSearchValue}
-                        onClick={() => setSearchValue('')}
-                    />
-                    <CategoriesList items={categories} />
-                    <BulletList items={filtered} />
+        <Container fluid className='mt-4'>
+            <main>
+                <div onClick={onClick}>
+                    <div>
+                        <SearchBar
+                            searchValue={searchValue}
+                            onSearch={handleSearchValue}
+                            onClick={() => setSearchValue('')}
+                        />
+                        <CategoriesList items={categories} />
+                        <BulletList items={filtered} />
+                    </div>
                 </div>
-            </div>
-        </main>
+            </main>
+        </Container>
     )
 };
 

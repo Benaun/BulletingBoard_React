@@ -1,6 +1,7 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
+import { Container } from 'react-bootstrap';
 
 export default function SearchBar({ searchValue, onSearch, onClick }) {
   const handleInputChange = (event) => {
@@ -8,8 +9,8 @@ export default function SearchBar({ searchValue, onSearch, onClick }) {
   };
 
   return (
-    <div className='container'>
-      <InputGroup className="mb-3">
+    <Container fluid>
+      <InputGroup className="mt-4">
         <Form.Control
           className='input'
           placeholder="Поиск"
@@ -22,6 +23,6 @@ export default function SearchBar({ searchValue, onSearch, onClick }) {
           Х
         </Button>
       </InputGroup>
-    </div>
+    </Container>
   )
 };

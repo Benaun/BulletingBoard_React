@@ -1,7 +1,7 @@
 import UserProfile from "@/components/UsersProfile/UserProfile";
 import DefaultLayout from "@/layouts/default";
 
-export default function AddBullet() {
+export default function Profile() {
     return (
         <DefaultLayout>
             <UserProfile />

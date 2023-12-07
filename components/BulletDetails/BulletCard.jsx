@@ -2,6 +2,7 @@ import css from "./BulletCard.module.css";
 import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { Col, Container, Row } from "react-bootstrap";
 
 
 export default function BulletCard({ item }) {
@@ -9,17 +10,15 @@ export default function BulletCard({ item }) {
     const router = useRouter();
     const { title, image, price, email, phone, description, region, city, street } = item;
     return (
-        <div className={css.container}>
-            <div className={css.content}>
-                <div className={css.left}>
-
+        <Container fluid className="mt-4">
+            <Row className="d-flex justify-content-between">
+                <Col lg={3} xl={6}>
                     <h2 className={css.left__title}>{title}</h2>
                     <div className={css.left__img}>
                         {image
                             ? <img src={image} alt={title} />
                             : <Image src={"/images/not.jpg"} alt="not" width={500} height={500} />
                         }
-
                     </div>
                     <div className={css.left__descr}>
                         <h2>Адрес</h2>
@@ -27,9 +26,9 @@ export default function BulletCard({ item }) {
                         <h2>Описание</h2>
                         <p>{description}</p>
                     </div>
-                </div>
+                </Col>
 
-                <div className={css.right}>
+                <Col xs={3}>
                     <h2 className={css.right__price}>{price} &#8381;</h2>
                     <button className={[css.right__btn, css.btn__purple].join(' ')}>Купить с доставкой</button>
                     <div className={css.right__descr}>
@@ -53,12 +52,20 @@ export default function BulletCard({ item }) {
                         <span>Написать сообщение</span><br />
                         <span>{email}</span>
                     </button>
-                </div>
-                <div>
-                    <button className={css.back__btn} onClick={() => router.back()}>&lArr;</button>
-                </div>
-            </div>
-        </div>
-
+                </Col>
+                <Col xs={1} className="d-flex justify-content-end align-items-start">
+                    <button
+                        onClick={() => router.back()}
+                        style={{
+                            background: "none",
+                            border: "none",
+                            fontSize: "25px"
+                        }}
+                    >
+                        &lArr;
+                    </button>
+                </Col>
+            </Row>
+        </Container>
     )
 }

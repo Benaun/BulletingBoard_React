@@ -1,9 +1,13 @@
-import css from './ProductForm.module.css'
-
-export default function Select ({list, formKey, register}) {
+export default function Select({ list, formKey, register }) {
     return (
         <div>
-            <select {...register(`${formKey}`)} className={css.select}>
+            <select
+                {...register(`${formKey}`)}
+                style={{
+                    width: "100%",
+                    padding: "6px 4px"
+                }}
+            >
                 <option value="">Категория</option>
                 {
                     list.map(item => (

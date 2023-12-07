@@ -1,9 +1,8 @@
 import { useSession, signIn, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Spiner from '../Spiner/Spiner';
+import Spiner from '../UI/Spiner';
 import { Button } from 'react-bootstrap';
-import css from './SignIn.module.css'
 
 export default function SignIn() {
     const { data: session, status } = useSession();
@@ -15,12 +14,17 @@ export default function SignIn() {
         console.log(session)
         return <>
             {session.user.role === "admin"
-                ? <Link href={"/controlPanel"}>
+                ? <Link href={"/admin"}>
                     <Image
                         src={'/images/crown.svg'}
                         width={40}
                         height={40}
-                        className={css.avatar}
+                        style={{
+                            border: "none",
+                            borderRadius: "50%",
+                            cursor: "pointer",
+                            marginRight: "15px"
+                        }}
                         alt="ava"
                     />
                 </Link>
@@ -30,7 +34,12 @@ export default function SignIn() {
                             src={session?.user?.image || '/images/avatar.svg'}
                             width={40}
                             height={40}
-                            className={css.avatar}
+                            style={{
+                                border: "none",
+                                borderRadius: "50%",
+                                cursor: "pointer",
+                                marginRight: "15px"
+                            }}
                             alt="ava"
                         />
                     </Link>

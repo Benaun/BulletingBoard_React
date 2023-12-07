@@ -1,17 +1,17 @@
+import { Container, Row } from "react-bootstrap";
 import BulletItem from "./BulletItem";
-import css from "./BulletList.module.css"
-
 
 export default function BulletList({ items }) {
-
     return (
-        <div className={css.items__list}>
-            {items.map((item) => (
-                <BulletItem
-                    key={item.id}
-                    item={item}
-                />
-            ))}
-        </div>
+        <Container fluid className="mt-3 mb-3">
+            <Row>
+                {items.map((item) => (
+                    <BulletItem
+                        key={item.id}
+                        item={item}
+                    />
+                ))}
+            </Row>
+        </Container>
     )
 }

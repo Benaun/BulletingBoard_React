@@ -1,7 +1,6 @@
-
-import Footer from "./Footer/Footer";
+import Footer from "./Footer";
 import { Head } from "./head";
-import Header from "./Header/Header"
+import Header from "./Header"
 
 export default function DefaultLayout({ children }) {
 	return (
