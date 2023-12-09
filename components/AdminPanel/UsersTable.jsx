@@ -11,6 +11,7 @@ const columnsUsers = [
     { title: 'Email', getVal: obj => obj.email, setVal: email => ({ email }) },
     { title: 'Пароль', getVal: obj => obj.password, setVal: password => ({ password }) },
     { title: 'Роль', getVal: obj => obj.role, setVal: role => ({ role }) },
+    { title: 'В избранном', getVal: obj => obj.favorites?.length ? obj.favorites?.length : "0" }
 ];
 const columnsWithButtons = columnsUsers.concat({
     title: '', getVal: ({ id }) => <>
@@ -22,6 +23,7 @@ const columnsWithButtons = columnsUsers.concat({
 export default function UserTable() {
     const
         [users, setUsers] = useState([]),
+        [isEdited, setIsedited] = useState(false),
         [sortColumns, setSortColumns] = useState('0'),
         [newUserId, setNewUserId] = useState(null),
         [error, setError] = useState(null),
@@ -94,10 +96,12 @@ export default function UserTable() {
                     setNewUserId(id);
                     const index = users.findIndex((obj) => obj.id == id);
                     setValues(columnsUsers.map(({ setVal, getVal }) => setVal ? getVal(users[index]) : ''));
+                    setIsedited(true)
                     return;
                 case 'cancel':
                     setNewUserId(null);
                     setValues(columnsUsers.map(() => ''));
+                    setIsedited(false)
                     return;
             };
             return;
@@ -129,11 +133,14 @@ export default function UserTable() {
     };
 
     return (
-        <div onClick={onClick}>
+        <div onClick={onClick} className={css.table__users}>
             <h2 className='text-center'>Таблица пользователей</h2>
+            <button className={[css.btn, css.btn__add].join(' ')}>Добавить</button>
             {users &&
                 <TableLayout items={users} columns={columnsWithButtons} sortColumns={sortColumns} newUserId={newUserId}>
-                    <UserForm columns={columnsUsers} values={values} setValues={setValues} />
+                    {isEdited &&
+                        <UserForm columns={columnsUsers} values={values} setValues={setValues} />
+                    }
                 </TableLayout>
             }
         </div>

@@ -10,7 +10,7 @@ export default function Footer() {
                         borderTop: "2px solid #222",
                         width: "100%",
                         justifyContent: "center",
-                        paddingTop: "12px"
+                        padding: "11px 0"
                     }}
                 >
                     &copy;2023 Andrey Kharitonov | All Rights Reserved

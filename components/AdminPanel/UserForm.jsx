@@ -2,7 +2,7 @@ import css from './UsersTable.module.css';
 
 export default function UserForm({ columns, values, setValues }) {
     return <tr>
-        {columns.map(({ title, setVal, getVal }, index) =>
+        {columns.map(({ title, setVal }, index) =>
             <td key={title}>
                 {setVal
                     ? <input value={values[index]} onInput={event => setValues(old => old.with(index, event.target.value))} />

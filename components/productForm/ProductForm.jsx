@@ -17,6 +17,7 @@ export default function ProductForm() {
                 id: Math.round(Math.random() * 100),
                 owner: session.user.id,
                 email: session.user.email,
+                inFavorites: [],
                 ...data
             })
         })

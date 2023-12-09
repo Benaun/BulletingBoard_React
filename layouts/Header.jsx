@@ -20,7 +20,7 @@ export default function Header({ }) {
                     <Container>
                         <Navbar.Brand href="/">
                             <Image
-                                src={"/images/logo.svg"}
+                                src={"/images/logo.png"}
                                 alt='Logo'
                                 width={71}
                                 height={64}

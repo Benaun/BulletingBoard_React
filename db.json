@@ -1,34 +1,6 @@
 {
   "bullets": [
     {
-      "id": 1,
-      "owner": "2",
-      "title": "Iphone 14 Pro",
-      "image": "https://cdn.mos.cms.futurecdn.net/xHJxY5wphaZv8QUaQ8Ccp6.jpg",
-      "price": "120 000",
-      "email": "Sincere@april.biz",
-      "phone": "+7-988-736-80-31",
-      "category": "Техника",
-      "description": "В отличном состоянии. Зарядное устройство. Использовался с защитным стеклом. На гарантии. Ростест. Отвязан от всех аккаунтов. Все детали в рабочем состоянии. Любые проверки на месте. Не вскрывался. Коробки нету",
-      "region": "Ставропольский край",
-      "city": "Ставропль",
-      "street": "ул. 50 лет ВЛКСМ"
-    },
-    {
-      "id": 2,
-      "owner": "3",
-      "title": "Mackbook Pro 16",
-      "image": "https://laptopnamha.vn/wp-content/uploads/2018/03/MACBOOK-PRO-2017-LAPTOPNAMHA.VN-3.jpg",
-      "price": "210 000",
-      "email": "Sincere@april.biz",
-      "phone": "+7-988-736-80-31",
-      "category": "Техника",
-      "description": "Пpoдаю MасВоok Рro 14 2023 М2Prо 16/512gb в цветe Spасe Gray.Hoутбук куплeн пaру месяцев нaзад, для рaбочиx зaдaч, co временем поняли что нужeн экpан по бoльшe и пpиняли peшениe купить 16 дюймoвый.B отличном cоcтoянии, лишь только мaлeнькая зaтeртость с одногo угла(испoльзoвaли в топ кейce и кaк я пoнял из за него).",
-      "region": "Ставропольский край",
-      "city": "Ставропль",
-      "street": "ул. Доваторцев"
-    },
-    {
       "id": 3,
       "owner": "2",
       "title": "Велосипед",
@@ -43,35 +15,7 @@
       "street": "ул. 40 лет Октября"
     },
     {
-      "id": 33,
-      "owner": "3",
-      "title": "Корм для собак, гиппоалергенный",
-      "image": "https://puddostavka.ru/upload/iblock/9af/ibhb2qyjdxwjor7zqdp6c3bhs0m18pb4.jpg",
-      "price": "3 000",
-      "email": "Sincere@april.biz",
-      "phone": "+7-988-736-80-31",
-      "category": "Животные",
-      "description": "Корм для собак Farmina N&D pumpkin 7 кг для собак средних и больших пород, гиппоалергенный со вкусом ягненок, тыква, черника. Торг уместен",
-      "region": "Краснодарский край",
-      "city": "Краснодар",
-      "street": "ул. Мичурина"
-    },
-    {
-      "id": 44,
-      "owner": "3",
-      "title": "Корм для собак, гиппоалергенный",
-      "image": "https://puddostavka.ru/upload/iblock/9af/ibhb2qyjdxwjor7zqdp6c3bhs0m18pb4.jpg",
-      "price": "3 000",
-      "email": "Sincere@april.biz",
-      "phone": "+7-988-736-80-31",
-      "category": "Животные",
-      "description": "Корм для собак Farmina N&D pumpkin 7 кг для собак средних и больших пород, гиппоалергенный со вкусом ягненок, тыква, черника. Торг уместен",
-      "region": "Краснодарский край",
-      "city": "Краснодар",
-      "street": "ул. Мичурина"
-    },
-    {
-      "id": 77,
+      "id": 5,
       "owner": "3",
       "title": "Корм для собак, гиппоалергенный",
       "image": "https://puddostavka.ru/upload/iblock/9af/ibhb2qyjdxwjor7zqdp6c3bhs0m18pb4.jpg",
@@ -99,63 +43,7 @@
       "street": "ул. Калинина"
     },
     {
-      "id": 8,
-      "owner": "3",
-      "title": "Корм для собак, гиппоалергенный",
-      "image": "https://puddostavka.ru/upload/iblock/9af/ibhb2qyjdxwjor7zqdp6c3bhs0m18pb4.jpg",
-      "price": "3 000",
-      "email": "Sincere@april.biz",
-      "phone": "+7-988-736-80-31",
-      "category": "Животные",
-      "description": "Корм для собак Farmina N&D pumpkin 7 кг для собак средних и больших пород, гиппоалергенный со вкусом ягненок, тыква, черника. Торг уместен",
-      "region": "Краснодарский край",
-      "city": "Краснодар",
-      "street": "ул. Мичурина"
-    },
-    {
       "id": 10,
-      "owner": "3",
-      "title": "Коттедж",
-      "image": "https://almode.ru/uploads/posts/2021-06/1624025196_14-almode_ru-p-krasivie-kottedzhi-16.jpg",
-      "price": "15 000 000",
-      "email": "Sincere@april.biz",
-      "phone": "+7-988-736-80-31",
-      "category": "Недвижимость",
-      "description": "В продaжe ЧАCTЬ коттеджа!!! Прoстoрный, уютный c xopошей плaнирoвкoй дoм , paсположенный в тиxом, живопиcном мecтe paйона Ташла. В дoмe три прocтopныe комнaты, куxня и pаздельный cан. узeл. Cделан cвeжий, сoвpеменный ремонт, из дopогих мaтериaлов. Beздe подвесныe потолки, в некоторых комнатах в два уровня. На территории двора есть парковка. За домом достаточно места для организации отдыха, посажены фруктовые деревья. Огородик. Остаётся дорогой кухонный гарнитур со всей встроенной техникой. Большой шкаф в комнате. ",
-      "region": "Волгоградская область",
-      "city": "Волгоград",
-      "street": "ул. Первомайская"
-    },
-    {
-      "id": 55,
-      "owner": "3",
-      "title": "Коттедж",
-      "image": "https://almode.ru/uploads/posts/2021-06/1624025196_14-almode_ru-p-krasivie-kottedzhi-16.jpg",
-      "price": "15 000 000",
-      "email": "Sincere@april.biz",
-      "phone": "+7-988-736-80-31",
-      "category": "Недвижимость",
-      "description": "В продaжe ЧАCTЬ коттеджа!!! Прoстoрный, уютный c xopошей плaнирoвкoй дoм , paсположенный в тиxом, живопиcном мecтe paйона Ташла. В дoмe три прocтopныe комнaты, куxня и pаздельный cан. узeл. Cделан cвeжий, сoвpеменный ремонт, из дopогих мaтериaлов. Beздe подвесныe потолки, в некоторых комнатах в два уровня. На территории двора есть парковка. За домом достаточно места для организации отдыха, посажены фруктовые деревья. Огородик. Остаётся дорогой кухонный гарнитур со всей встроенной техникой. Большой шкаф в комнате. ",
-      "region": "Волгоградская область",
-      "city": "Волгоград",
-      "street": "ул. Первомайская"
-    },
-    {
-      "id": 144,
-      "owner": "3",
-      "title": "Коттедж",
-      "image": "https://almode.ru/uploads/posts/2021-06/1624025196_14-almode_ru-p-krasivie-kottedzhi-16.jpg",
-      "price": "15 000 000",
-      "email": "Sincere@april.biz",
-      "phone": "+7-988-736-80-31",
-      "category": "Недвижимость",
-      "description": "В продaжe ЧАCTЬ коттеджа!!! Прoстoрный, уютный c xopошей плaнирoвкoй дoм , paсположенный в тиxом, живопиcном мecтe paйона Ташла. В дoмe три прocтopныe комнaты, куxня и pаздельный cан. узeл. Cделан cвeжий, сoвpеменный ремонт, из дopогих мaтериaлов. Beздe подвесныe потолки, в некоторых комнатах в два уровня. На территории двора есть парковка. За домом достаточно места для организации отдыха, посажены фруктовые деревья. Огородик. Остаётся дорогой кухонный гарнитур со всей встроенной техникой. Большой шкаф в комнате. ",
-      "region": "Волгоградская область",
-      "city": "Волгоград",
-      "street": "ул. Первомайская"
-    },
-    {
-      "id": 177,
       "owner": "3",
       "title": "Коттедж",
       "image": "https://almode.ru/uploads/posts/2021-06/1624025196_14-almode_ru-p-krasivie-kottedzhi-16.jpg",
@@ -230,30 +118,32 @@
       "id": 1,
       "email": "admin",
       "name": "Admin",
-      "password": "123456",
+      "password": "admin",
       "role": "admin"
     },
     {
       "id": 2,
       "email": "123@mail.ru",
-      "name": "Pavel",
+      "name": "Alex",
       "password": "123456",
-      "role": "user"
+      "role": "user",
+      "favorites": []
     },
     {
       "id": 3,
       "email": "andrey@mail.ru",
       "name": "Andrey",
       "password": "andrey",
-      "role": "user"
+      "role": "user",
+      "favorites": []
     },
     {
       "id": 94,
       "name": "Petr",
       "role": "user",
       "email": "123@pert.ru",
-      "password": "222222"
+      "password": "222222",
+      "favorites": []
     }
-  ],
-  "favorites": []
+  ]
 }

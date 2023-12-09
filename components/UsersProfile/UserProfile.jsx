@@ -4,7 +4,7 @@ import ProfileHeader from "./ProfileHeader";
 
 export default function UserProfile() {
     return (
-        <Container fluid>
+        <Container fluid className="h-auto">
             <ProfileHeader />
             <ProfileBoard />
         </Container>

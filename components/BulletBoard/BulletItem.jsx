@@ -4,14 +4,12 @@ import Card from 'react-bootstrap/Card';
 import { useSession } from "next-auth/react";
 import LikeBtn from "../UI/LikeBtn";
 import DeleteBtn from "../UI/DeleteBtn";
-import { memo, useState } from "react";
 import { Col, Container } from "react-bootstrap";
 
 
-export default memo(function BulletItem({ item }) {
+export default function BulletItem({ item }) {
     const { data: session } = useSession();
     const { id, title, price, image, city, owner } = item;
-    const [isActive, setIsActive] = useState(false);
 
     return (
         <Col xs={8} md={6} lg={4} xl={3} className="mb-3">
@@ -35,11 +33,13 @@ export default memo(function BulletItem({ item }) {
                     {session?.user.role === "admin" || !session
                         ? <div></div>
                         : owner !== session?.user.id
-                            ? <LikeBtn width={20} height={20} fill={isActive ? "#f01010" : "#c9b6b6"} id={id} />
-                            : <DeleteBtn width={20} height={20} fill={"#f01010"} id={id} />
+                            ? <LikeBtn width={20} height={20} fill={"#c9b6b6"} id={id}/>
+                            : window.location.href == "http://localhost:3000/profile"
+                                ? <DeleteBtn width={20} height={20} fill={"#f01010"} id={id} />
+                                : <div></div>
                     }
                 </Card.Body>
             </Card>
         </Col>
     )
-}) 
+}

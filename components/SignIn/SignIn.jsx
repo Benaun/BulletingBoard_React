@@ -11,7 +11,6 @@ export default function SignIn() {
     }
 
     if (session) {
-        console.log(session)
         return <>
             {session.user.role === "admin"
                 ? <Link href={"/admin"}>
