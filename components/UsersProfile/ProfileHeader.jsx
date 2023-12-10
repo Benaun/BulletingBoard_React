@@ -2,8 +2,7 @@ import Image from 'react-bootstrap/Image';
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { Container } from 'react-bootstrap';
-
-
+import Link from 'next/link';
 
 export default function ProfileHeader() {
     const { data: session } = useSession();
@@ -46,6 +45,17 @@ export default function ProfileHeader() {
                 />
                 <h3>{currentUser[0]?.name || session?.user.email}</h3>
                 <h3>{currentUser[0]?.email}</h3>
+                <Link href={"/editUser"}>
+                    <button
+                        style={{ 
+                            border: "none",
+                            backgroundColor: "transparent",
+                            fontSize: "25px"
+                        }}
+                    >
+                        &#9997;
+                    </button>
+                </Link>
             </div>
         </Container>
     )

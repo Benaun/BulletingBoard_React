@@ -41,7 +41,7 @@ export default function UserTable() {
             }
         }
         getUsers();
-    }, []);
+    }, [users]);
 
     async function onClick(evt) {
         const source = evt.target.closest('button[data-action]');

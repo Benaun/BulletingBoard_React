@@ -57,20 +57,6 @@
       "street": "ул. Первомайская"
     },
     {
-      "id": 9,
-      "owner": "3",
-      "title": "Корм для собак, гиппоалергенный",
-      "image": "https://puddostavka.ru/upload/iblock/9af/ibhb2qyjdxwjor7zqdp6c3bhs0m18pb4.jpg",
-      "price": "3 000",
-      "email": "Sincere@april.biz",
-      "phone": "+7-988-736-80-31",
-      "category": "Животные",
-      "description": "Корм для собак Farmina N&D pumpkin 7 кг для собак средних и больших пород, гиппоалергенный со вкусом ягненок, тыква, черника. Торг уместен",
-      "region": "Краснодарский край",
-      "city": "Краснодар",
-      "street": "ул. Мичурина"
-    },
-    {
       "id": 11,
       "owner": "2",
       "title": "Грузоперевозки",
@@ -111,6 +97,20 @@
       "region": "Астраханская область",
       "city": "Астрахань",
       "street": "ул. Ленина"
+    },
+    {
+      "id": 81,
+      "owner": "2",
+      "email": "123@mail.ru",
+      "title": "Тигр",
+      "image": "https://avatanplus.com/files/resources/original/579091ceb27a91560cb98f8b.jpg",
+      "price": "15000",
+      "phone": "+791879222222",
+      "region": "Ставропольский край",
+      "city": "Ставрополь",
+      "street": "Ленина",
+      "description": "Хороший тигр! почти ручной",
+      "category": "Животные"
     }
   ],
   "users": [

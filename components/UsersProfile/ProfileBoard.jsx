@@ -65,7 +65,7 @@ export default function ProfileBoard() {
                 const userId = session.user.id;
                 const currentBullet = bullets.find(bullet => bullet.id == id);
                 const currentUser = users?.find(user => user.id == userId);
-                const favoritesArray = currentUser.favorites;
+                const favoritesArray = currentUser?.favorites;
                 const inFav = favoritesArray?.find(favorite => favorite.id == currentBullet.id);
                 if (inFav) {
                     try {

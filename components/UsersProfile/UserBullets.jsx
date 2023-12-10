@@ -1,6 +1,6 @@
-import BulletList from '../BulletBoard/BulletList';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
+import UserBulletList from './UserBulletList';
 
 export default function UserBullets () {
     const { data: session } = useSession();
@@ -25,7 +25,7 @@ export default function UserBullets () {
 
     return <>
         {filtered.length
-            ? <BulletList items={filtered} />
+            ? <UserBulletList items={filtered} />
             : <h2 style={{margin: "20px 0"}}>Нет объявлений</h2>
         }
     </>

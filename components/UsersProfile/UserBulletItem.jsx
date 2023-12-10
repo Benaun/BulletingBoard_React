@@ -1,15 +1,22 @@
 import Link from "next/link";
-import css from './BulletItem.module.css';
+import css from '../BulletBoard/BulletItem.module.css';
 import Card from 'react-bootstrap/Card';
 import { useSession } from "next-auth/react";
 import LikeBtn from "../UI/LikeBtn";
 import DeleteBtn from "../UI/DeleteBtn";
 import { Col, Container } from "react-bootstrap";
+import { useState } from "react";
+import EditBulletForm from "../productForm/EditBulletForm";
 
-export default function BulletItem({ item }) {
+
+export default function UserBulletItem({ item }) {
+    const [showForm, setShowForm] = useState(false);
     const { data: session } = useSession();
     const { id, title, price, image, city, owner } = item;
 
+    const handleShowForm = () => {
+        setShowForm(false)
+    }
     return (
         <Col xs={8} md={6} lg={4} xl={3} className="mb-3">
             <Card key={id} className={css.item__card}>
@@ -51,6 +58,7 @@ export default function BulletItem({ item }) {
                     }
                 </Card.Body>
             </Card>
+            {showForm && <EditBulletForm bulletId={id} onClick={handleShowForm} />}
         </Col>
     )
 }

@@ -44,7 +44,7 @@ export default function BulletBoard() {
             }
         }
         getUsers();
-    }, []);
+    }, [users, bullets]);
 
     const handleSearchValue = (value) => {
         setSearchValue(value);
@@ -70,13 +70,14 @@ export default function BulletBoard() {
                             throw (new Error(res.status + ' ' + res.statusText));
                         }
                         toast.success("Объявление удалено!")
+                        window.location.reload();
                     });
             }
             if (action == "like") {
                 const userId = session.user.id;
                 const currentBullet = bullets.find(bullet => bullet.id == id);
                 const currentUser = users?.find(user => user.id == userId);
-                const favoritesArray = currentUser.favorites;
+                const favoritesArray = currentUser?.favorites;
                 const inFav = favoritesArray?.find(favorite => favorite.id == currentBullet.id);
                 if (!inFav) {
                     try {

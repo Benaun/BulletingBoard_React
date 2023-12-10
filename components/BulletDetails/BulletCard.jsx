@@ -8,7 +8,7 @@ import { Col, Container, Row } from "react-bootstrap";
 export default function BulletCard({ item }) {
     const [visible, setVisible] = useState(false);
     const router = useRouter();
-    const { title, image, price, email, phone, description, region, city, street } = item;
+    const { title, image, price, phone, description, region, city, street } = item;
     return (
         <Container fluid className="mt-4">
             <Row className="d-flex justify-content-between">
@@ -30,7 +30,6 @@ export default function BulletCard({ item }) {
 
                 <Col xs={3}>
                     <h2 className={css.right__price}>{price} &#8381;</h2>
-                    <button className={[css.right__btn, css.btn__purple].join(' ')}>Купить с доставкой</button>
                     <div className={css.right__descr}>
                         <p><span className={css.icon}>
                             <Image src={"/icons/delivery.svg"} alt="delivery" width={25} height={25} />
@@ -44,13 +43,9 @@ export default function BulletCard({ item }) {
                     </div>
                     <button onClick={() => setVisible(true)} className={[css.right__btn, css.btn__green].join(' ')}>
                         <span>Показать номер</span><br />
-                        {!visible
+                        {!visible 
                             ? <span>+7 XXX XXX XX XX</span>
                             : <span>{phone}</span>}
-                    </button>
-                    <button className={[css.right__btn, css.btn__blue].join(' ')}>
-                        <span>Написать сообщение</span><br />
-                        <span>{email}</span>
                     </button>
                 </Col>
                 <Col xs={1} className="d-flex justify-content-end align-items-start">

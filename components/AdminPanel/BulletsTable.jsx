@@ -17,6 +17,7 @@ const columnsWithButtons = columnsBullets.concat({
     </>
 });
 
+
 export default function BulletsTable() {
     const
         [bullets, setBullets] = useState([]),
@@ -35,7 +36,7 @@ export default function BulletsTable() {
             }
         }
         getBullets();
-    }, []);
+    }, [bullets]);
 
     async function onClick(evt) {
         const source = evt.target.closest('button[data-action]');

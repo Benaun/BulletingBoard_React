@@ -1,3 +1,3 @@
 export { default } from "next-auth/middleware"
 
-export const config = { matcher: ['/bullet/:path*', '/profile/:path*', '/addBullet', '/controlPanel/:path*']}
+export const config = { matcher: ['/profile/:path*', '/addBullet', '/controlPanel/:path*', '/editUser', '/admin']}
