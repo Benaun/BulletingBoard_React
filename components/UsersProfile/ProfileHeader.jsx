@@ -1,33 +1,16 @@
-import Image from 'react-bootstrap/Image';
-import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { Container } from 'react-bootstrap';
+import { FaUserCircle } from "react-icons/fa";
 import Link from 'next/link';
+import { useFetchAllUsersQuery } from '@/store/services/UserService';
+import EditBtn from '../UI/EditBtn';
+import { getCurrentUser } from '@/assets/getCurrent';
 
 export default function ProfileHeader() {
     const { data: session } = useSession();
-    const [users, setUsers] = useState([]);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        async function getUsers() {
-            try {
-                const response = await fetch('http://localhost:8000/users');
-                if (!response.ok) throw new Error('fetch ' + response.status);
-                setUsers(await response.json());
-                setError(null);
-            } catch (err) {
-                setError(err)
-            }
-        }
-        getUsers();
-    }, [])
-
-    const currentUser = users.filter((user) => {
-        if (user.email === session?.user.email) {
-            return user
-        }
-    });
+    const {data: users} = useFetchAllUsersQuery();
+    const userId = session?.user.id;
+    const currentUser = getCurrentUser(users, userId);
 
     return (
         <Container fluid className='mt-3 mb-3'>
@@ -36,25 +19,11 @@ export default function ProfileHeader() {
                 alignItems: "center",
                 gap: "30px",
             }}>
-                <Image
-                    src={session?.user.image || '/images/avatar.svg'}
-                    width={50}
-                    height={50}
-                    roundedCircle
-                    alt="avatar"
-                />
-                <h3>{currentUser[0]?.name || session?.user.email}</h3>
-                <h3>{currentUser[0]?.email}</h3>
-                <Link href={"/editUser"}>
-                    <button
-                        style={{ 
-                            border: "none",
-                            backgroundColor: "transparent",
-                            fontSize: "25px"
-                        }}
-                    >
-                        &#9997;
-                    </button>
+                <FaUserCircle size={42} fill='rgb(185, 184, 182)'/>
+                <h3>{currentUser?.name || session?.user.email}</h3>
+                <h3>{currentUser?.email}</h3>
+                <Link href={`/editUser/${userId}`}>
+                    <EditBtn size={30} />
                 </Link>
             </div>
         </Container>

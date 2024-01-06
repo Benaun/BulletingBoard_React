@@ -1,7 +1,5 @@
-const deleteFromFav = (items, delItem) => {
-    const updateArray = [...items];
-    updateArray.splice(delItem, 1);
-    return updateArray
+const deleteFromFav = (items, itemToDelete) => {
+    return items.filter(item => item.id !== itemToDelete.id);
 };
 
 export default deleteFromFav;

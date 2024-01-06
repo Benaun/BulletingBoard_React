@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { bulletAPI } from '@/store/services/BulletService';
 import TableLayout from './TablesLayout';
 import css from './UsersTable.module.css';
 
@@ -19,24 +19,7 @@ const columnsWithButtons = columnsBullets.concat({
 
 
 export default function BulletsTable() {
-    const
-        [bullets, setBullets] = useState([]),
-        [sortColumns, setSortColumns] = useState('0'),
-        [error, setError] = useState(null)
-
-    useEffect(() => {
-        async function getBullets() {
-            try {
-                const response = await fetch(API);
-                if (!response.ok) throw new Error('fetch ' + response.status);
-                setBullets(await response.json());
-                setError(null);
-            } catch (err) {
-                setError(err)
-            }
-        }
-        getBullets();
-    }, [bullets]);
+    const { data: bullets } = bulletAPI.useFetchAllBulletsQuery();
 
     async function onClick(evt) {
         const source = evt.target.closest('button[data-action]');
@@ -53,40 +36,15 @@ export default function BulletsTable() {
             };
             return;
         };
-
-        const th = evt.target.closest('th');
-        if (th && th.cellIndex) {
-            let newSort;
-            if (Math.abs(sortColumns) === 1 + th.cellIndex) {
-                newSort = -sortColumns;
-            } else {
-                newSort = 1 + th.cellIndex;
-            }
-            const { getVal } = columnsBullets[Math.abs(newSort) - 1];
-
-            const sortedBullets = bullets.toSorted((a, b) => {
-                switch (true) {
-                    case (typeof getVal(a) === 'string' && typeof getVal(b) === 'string'):
-                        return getVal(a).localeCompare(getVal(b));
-                }
-            });
-
-            if (newSort < 0) {
-                sortedBullets.reverse();
-            };
-            setBullets(sortedBullets);
-            setSortColumns(newSort);
-        };
     };
 
     return (
-        <div onClick={onClick}>
+        <div>
             <h2 className='text-center'>Таблица объявлений</h2>
             {bullets &&
                 <TableLayout
                     items={bullets}
                     columns={columnsWithButtons}
-                    sortColumns={sortColumns}
                 />
             }
         </div>

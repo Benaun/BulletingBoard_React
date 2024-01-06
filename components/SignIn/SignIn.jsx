@@ -1,7 +1,7 @@
 import { useSession, signIn, signOut } from 'next-auth/react';
 import Link from 'next/link';
-import Image from 'next/image';
 import Spiner from '../UI/Spiner';
+import { FaCrown, FaUserCircle } from "react-icons/fa";
 import { Button } from 'react-bootstrap';
 
 export default function SignIn() {
@@ -14,32 +14,17 @@ export default function SignIn() {
         return <>
             {session.user.role === "admin"
                 ? <Link href={"/admin"}>
-                    <Image
-                        src={'/images/crown.svg'}
-                        width={40}
-                        height={40}
-                        style={{
-                            border: "none",
-                            borderRadius: "50%",
-                            cursor: "pointer",
-                            marginRight: "15px"
-                        }}
-                        alt="ava"
+                    <FaCrown
+                        size={42}
+                        cursor={'pointer'}
+                        fill='rgb(185, 184, 182)'
                     />
                 </Link>
                 : <div>
                     <Link href={"/profile"}>
-                        <Image
-                            src={session?.user?.image || '/images/avatar.svg'}
-                            width={40}
-                            height={40}
-                            style={{
-                                border: "none",
-                                borderRadius: "50%",
-                                cursor: "pointer",
-                                marginRight: "15px"
-                            }}
-                            alt="ava"
+                        <FaUserCircle
+                            size={42}
+                            fill='rgb(185, 184, 182)'
                         />
                     </Link>
                     <Link href={'/addBullet'}>
@@ -56,6 +41,7 @@ export default function SignIn() {
             </Link>
         </>
     }
+
     return (
         <Link href={"#"} onClick={() => signIn({ callbackUrl: "/" })}>
             <Button variant="warning">

@@ -5,29 +5,25 @@ import { useForm } from 'react-hook-form';
 import { useSession } from 'next-auth/react';
 import { InputGroup, Form, Button } from 'react-bootstrap';
 import toast from 'react-hot-toast';
+import { useCreateBulletMutation } from '@/store/services/BulletService';
 
 export default function ProductForm() {
     const { handleSubmit, register, reset } = useForm();
     const { data: session } = useSession();
+    const [createBullet] = useCreateBulletMutation();
 
-    const addPostHandler = (data) => {
-        fetch('http://localhost:8000/bullets/', {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                id: Math.round(Math.random() * 100),
-                owner: session.user.id,
-                email: session.user.email,
-                ...data
-            })
+    const addPostHandler = async (data) => {
+        await createBullet({
+            id: Math.round(Math.random() * 100),
+            owner: session.user.id,
+            email: session.user.email,
+            ...data
         })
-            .then(async res => {
-                if (!res.ok) {
-                    throw (new Error(res.status + ' ' + res.statusText));
-                }
-                reset();
-                toast.success("Объявление размещено!")
-            });
+            .unwrap()
+            .then(toast.success("Объявление создано!"))
+            .catch((error) => toast.error("Что-то пошло не так...", error))
+        reset();
+        console.log(data)
     }
 
     return (
@@ -49,10 +45,9 @@ export default function ProductForm() {
                             </InputGroup>
                             <InputGroup className="mb-3">
                                 <InputGroup.Text id="inputGroup-sizing-default">
-                                    Изображение<span style={{ color: "red" }}>*</span>
+                                    Изображение
                                 </InputGroup.Text>
                                 <Form.Control
-                                    required
                                     {...register('image')}
                                     aria-describedby="inputGroup-sizing-default"
                                 />

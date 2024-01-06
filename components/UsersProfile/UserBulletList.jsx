@@ -1,12 +1,12 @@
 import { Container, Row } from "react-bootstrap";
-import UserBulletItem from "./UserBulletItem";
+import BulletItem from "../BulletBoard/BulletItem";
 
 export default function UserBulletList({ items }) {
     return (
         <Container fluid className="mt-3 mb-3">
             <Row>
                 {items.map((item) => (
-                    <UserBulletItem
+                    <BulletItem
                         key={item.id}
                         item={item}
                     />

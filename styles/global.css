@@ -39,4 +39,9 @@ body {
     color: #222;
 }
 
+button {
+    border: none;
+    background-color: transparent;
+}
+
 

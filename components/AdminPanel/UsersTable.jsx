@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import TableLayout from './TablesLayout';
 import UserForm from './UserForm';
 import css from './UsersTable.module.css';
+import { userAPI } from '@/store/services/UserService';
 
 const API = 'http://localhost:8000/users/';
 
@@ -21,27 +22,10 @@ const columnsWithButtons = columnsUsers.concat({
 });
 
 export default function UserTable() {
-    const
-        [users, setUsers] = useState([]),
-        [isEdited, setIsedited] = useState(false),
-        [sortColumns, setSortColumns] = useState('0'),
-        [newUserId, setNewUserId] = useState(null),
-        [error, setError] = useState(null),
-        [values, setValues] = useState(columnsUsers.map(() => ''))
-
-    useEffect(() => {
-        async function getUsers() {
-            try {
-                const response = await fetch(API);
-                if (!response.ok) throw new Error('fetch ' + response.status);
-                setUsers(await response.json());
-                setError(null);
-            } catch (err) {
-                setError(err)
-            }
-        }
-        getUsers();
-    }, [users]);
+    const [isEdited, setIsedited] = useState(false);
+    const [newUserId, setNewUserId] = useState(null);
+    const [values, setValues] = useState(columnsUsers.map(() => ''));
+    const {data: users} = userAPI.useFetchAllUsersQuery();
 
     async function onClick(evt) {
         const source = evt.target.closest('button[data-action]');
@@ -105,31 +89,7 @@ export default function UserTable() {
                     return;
             };
             return;
-        };
-
-        const th = evt.target.closest('th');
-        if (th && th.cellIndex) {
-            let newSort;
-            if (Math.abs(sortColumns) === 1 + th.cellIndex) {
-                newSort = -sortColumns;
-            } else {
-                newSort = 1 + th.cellIndex;
-            }
-            const { getVal } = columnsUsers[Math.abs(newSort) - 1];
-
-            const sortedUsers = users.toSorted((a, b) => {
-                switch (true) {
-                    case (typeof getVal(a) === 'string' && typeof getVal(b) === 'string'):
-                        return getVal(a).localeCompare(getVal(b));
-                }
-            });
-
-            if (newSort < 0) {
-                sortedUsers.reverse();
-            };
-            setUsers(sortedUsers);
-            setSortColumns(newSort);
-        };
+        };;
     };
 
     return (
@@ -137,7 +97,7 @@ export default function UserTable() {
             <h2 className='text-center'>Таблица пользователей</h2>
             <button className={[css.btn, css.btn__add].join(' ')}>Добавить</button>
             {users &&
-                <TableLayout items={users} columns={columnsWithButtons} sortColumns={sortColumns} newUserId={newUserId}>
+                <TableLayout items={users} columns={columnsWithButtons} newUserId={newUserId}>
                     {isEdited &&
                         <UserForm columns={columnsUsers} values={values} setValues={setValues} />
                     }

@@ -1,17 +1,14 @@
 import { Fragment } from 'react';
 import Table from 'react-bootstrap/Table';
 
-export default function TableLayout({ items, columns, sortColumns, newUserId, children }) {
+export default function TableLayout({ items, columns, newUserId, children }) {
     return (
             <Table striped bordered hover responsive>
                 <thead>
                     <tr>
-                        {columns.map(({ title }, index) =>
+                        {columns.map(({ title }) =>
                             <th
                                 key={title}
-                                className={[
-                                    index === Math.abs(sortColumns) - 1 ? "&#9650;" : '',
-                                    index === Math.abs(sortColumns) - 1 && sortColumns < 0 ? "&#9660;" : ''].join(' ')}
                             >
                                 {title}
                             </th>)}

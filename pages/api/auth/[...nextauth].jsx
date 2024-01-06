@@ -1,9 +1,8 @@
+import getUsers from '@/assets/getusers';
 import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
-import getUsers from '@/assets/getusers';
-
 
 const authConfig = {
     providers: [
@@ -23,11 +22,8 @@ const authConfig = {
             },
             async authorize(credentials) {
                 if (!credentials?.email || !credentials.password) return null;
-
                 const users = await getUsers();
-
-                const currentUser = users.find(user => user.email === credentials.email);
-
+                const currentUser = users?.find(user => user.email === credentials.email);
                 if (currentUser && currentUser.password === credentials.password) {
                     return currentUser
                 }

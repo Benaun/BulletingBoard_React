@@ -1,6 +1,7 @@
 .btn__submit {
     width: 250px;
     padding: 10px 0;
+    margin-right: 10px;
 }
 
 .main {
@@ -9,3 +10,4 @@
     text-align: center;
     min-height: 85.4vh;
 }
+

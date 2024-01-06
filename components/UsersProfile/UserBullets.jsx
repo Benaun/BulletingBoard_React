@@ -1,30 +1,15 @@
 import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
 import UserBulletList from './UserBulletList';
+import { useFetchAllBulletsQuery } from '@/store/services/BulletService';
 
 export default function UserBullets () {
     const { data: session } = useSession();
-    const [bullets, setBullets] = useState([]);
-    const [error, setError] = useState(null);
+    const {data: bullets} = useFetchAllBulletsQuery();
 
-    useEffect(() => {
-        async function getBullets() {
-            try {
-                const response = await fetch('http://localhost:8000/bullets');
-                if (!response.ok) throw new Error('fetch ' + response.status);
-                setBullets(await response.json());
-                setError(null);
-            } catch (err) {
-                setError(err)
-            }
-        }
-        getBullets();
-    }, [])
-
-    const filtered = bullets.filter((bullet) => bullet.owner === session?.user.id);
+    const filtered = bullets?.filter((bullet) => bullet.owner === session?.user.id);
 
     return <>
-        {filtered.length
+        {filtered?.length
             ? <UserBulletList items={filtered} />
             : <h2 style={{margin: "20px 0"}}>Нет объявлений</h2>
         }
