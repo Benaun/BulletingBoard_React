@@ -24,7 +24,7 @@
 
 ## RUN
   ```bash
-  npm serv
+  npm run serv
   ```
 
 
