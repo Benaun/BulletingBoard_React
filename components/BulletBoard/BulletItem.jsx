@@ -7,7 +7,6 @@ import { useState } from "react";
 import { Col, Container } from "react-bootstrap";
 import { useFetchAllUsersQuery, useUpdateUserFavoritesMutation } from "@/store/services/UserService";
 import { useDeleteBulletMutation, useFetchAllBulletsQuery } from "@/store/services/BulletService";
-import EditBulletForm from "../productForm/EditBulletForm";
 import deleteFromFav from "@/assets/deleteItem";
 import HeartBtn from "../UI/HeartBtn";
 import DeleteBtn from "../UI/DeleteBtn";

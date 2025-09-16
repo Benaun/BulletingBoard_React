@@ -1,48 +1,60 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+// React Query wrappers preserving RTK Query-like API
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { httpDelete, httpGet, httpPatch, httpPost } from '@/shared/api/http'
+import { usersSchema, userSchema } from '@/entities/user/model/schema'
 
-export const userAPI = createApi({
-    reducerPath: 'userAPI',
-    baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000' }),
-    tagTypes: ['Users'],
-    endpoints: (build) => ({
-        fetchAllUsers: build.query({
-            query: () => ({
-                url: '/users'
-            }),
-            providesTags: ['Users']
-        }),
-        addUser: build.mutation({
-            query: (user) => ({
-                url: '/users',
-                method: 'POST',
-                body: user
-            }),
-            invalidatesTags: ['Users']
-        }),
-        updateUser: build.mutation({
-            query: (user) => ({
-                url: `/users/${user.id}`,
-                method: 'PATCH',
-                body: user
-            }),
-            invalidatesTags: ['Users']
-        }),
-        deleteUser: build.mutation({
-            query: (id) => ({
-                url: `/users/${id}`,
-                method: 'DELETE'
-            }),
-            invalidatesTags: ['Users']
-        }),
-        updateUserFavorites: build.mutation({
-            query: ({userId, favorites}) => ({
-                url: `/users/${userId}`,
-                method: 'PATCH',
-                body: {favorites}
-            }),
-            invalidatesTags: ['Users']
-        })
-    })
-})
+export function useFetchAllUsersQuery() {
+    const query = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const data = await httpGet('/users');
+            return usersSchema.parse(data);
+        },
+    });
+    return { data: query.data, isLoading: query.isLoading, error: query.error };
+}
 
-export const { useUpdateUserFavoritesMutation, useAddUserMutation, useDeleteUserMutation, useFetchAllUsersQuery, useUpdateUserMutation } = userAPI
+export function useAddUserMutation() {
+    const queryClient = useQueryClient();
+    const mutation = useMutation({
+        mutationFn: async (user) => userSchema.parse(await httpPost('/users', user)),
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'] }),
+    });
+    const mut = (user) => ({ unwrap: () => mutation.mutateAsync(user) });
+    return [mut, mutation];
+}
+
+export function useUpdateUserMutation() {
+    const queryClient = useQueryClient();
+    const mutation = useMutation({
+        mutationFn: async (user) => userSchema.parse(await httpPatch(`/users/${user.id}`, user)),
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'] }),
+    });
+    const mut = (user) => ({ unwrap: () => mutation.mutateAsync(user) });
+    return [mut, mutation];
+}
+
+export function useDeleteUserMutation() {
+    const queryClient = useQueryClient();
+    const mutation = useMutation({
+        mutationFn: async (id) => {
+            await httpDelete(`/users/${id}`);
+            return { id };
+        },
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'] }),
+    });
+    const mut = (id) => ({ unwrap: () => mutation.mutateAsync(id) });
+    return [mut, mutation];
+}
+
+export function useUpdateUserFavoritesMutation() {
+    const queryClient = useQueryClient();
+    const mutation = useMutation({
+        mutationFn: async ({ userId, favorites }) => userSchema.parse(await httpPatch(`/users/${userId}`, { favorites })),
+        onSuccess: () => queryClient.invalidateQueries({ queryKey: ['users'] }),
+    });
+    const mut = (args) => ({ unwrap: () => mutation.mutateAsync(args) });
+    return [mut, mutation];
+}
+
+export const userAPI = { useFetchAllUsersQuery };
