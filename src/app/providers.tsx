@@ -8,6 +8,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { SessionProvider } from 'next-auth/react'
 import { useState } from 'react'
 
+import { SearchProvider } from '@/shared/contexts/SearchContext'
+
 export function Providers({
   children
 }: {
@@ -29,8 +31,10 @@ export function Providers({
   return (
     <SessionProvider>
       <QueryClientProvider client={queryClient}>
-        {children}
-        <ReactQueryDevtools initialIsOpen={false} />
+        <SearchProvider>
+          {children}
+          <ReactQueryDevtools initialIsOpen={false} />
+        </SearchProvider>
       </QueryClientProvider>
     </SessionProvider>
   )

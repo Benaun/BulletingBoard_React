@@ -1,22 +1,27 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import SignIn from '@/features/auth/ui/SignIn'
+import HeaderSearch from './HeaderSearch'
+import LoginButton from './LoginButton'
+import UserMenu from './UserMenu'
 
 export default function Header() {
   const pathname = usePathname()
   const isHomePage = pathname === '/'
+  const { data: session } = useSession()
 
   return (
     <header
-      className={`bg-white shadow-sm border-b transition-all duration-300 ease-in-out z-40 ${
+      className={`bg-white shadow-sm transition-all duration-300 ease-in-out z-40 ${
         isHomePage ? 'sticky top-0' : ''
       }`}
     >
-      <nav className='container flex items-center justify-between py-3'>
+      <nav className='container flex items-center justify-between p-4'>
+        {/* Логотип */}
         <Link
           href='/'
           aria-label='Домой'
@@ -24,16 +29,19 @@ export default function Header() {
         >
           <Image
             src={'/images/logo.png'}
-            alt='Logo'
-            width={71}
-            height={64}
+            alt='Логотип доски объявлений'
+            width={64}
+            height={58}
+            priority
           />
         </Link>
-        <h3 className='text-xl font-bold text-red-600 mb-0 text-center flex-grow'>
-          Доска бесплатных объявлений
-        </h3>
+
+        {/* Строка поиска */}
+        <HeaderSearch />
+
+        {/* Правая часть */}
         <div className='flex items-center'>
-          <SignIn />
+          {session ? <UserMenu /> : <LoginButton />}
         </div>
       </nav>
     </header>

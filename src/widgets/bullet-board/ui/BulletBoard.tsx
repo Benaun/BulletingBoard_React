@@ -5,14 +5,14 @@ import { Container } from 'react-bootstrap'
 
 import CategoriesList from '@/features/categories/ui/CategoriesList'
 
-import SearchBar from '@/shared/ui/search/SearchBar'
+import { useSearch } from '@/shared/contexts/useSearch'
 
 import { useFetchAllBulletsQuery } from '@/entities/bullet/api/service'
 import type { Bullet } from '@/entities/bullet/model/schema'
 import BulletList from '@/entities/bullet/ui/BulletList'
 
 export default function BulletBoard() {
-  const [searchValue, setSearchValue] = useState('')
+  const { searchValue, setSearchValue } = useSearch()
   type ListFilter = (b: {
     category?: string
     title: string
@@ -101,11 +101,6 @@ export default function BulletBoard() {
       <main className='min-h-[80.4vh]'>
         <div onClick={onClick}>
           <div>
-            <SearchBar
-              searchValue={searchValue}
-              onSearch={handleSearchValue}
-              onClick={() => setSearchValue('')}
-            />
             <CategoriesList />
             <BulletList items={filtered} />
           </div>
