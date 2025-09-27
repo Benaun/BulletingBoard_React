@@ -12,19 +12,15 @@ export default function Header() {
 
   return (
     <header
-      className={`bg-white shadow-sm border-bottom ${
-        isHomePage ? 'sticky-top' : ''
+      className={`bg-white shadow-sm border-b transition-all duration-300 ease-in-out z-40 ${
+        isHomePage ? 'sticky top-0' : ''
       }`}
-      style={{
-        transition: 'all 0.3s ease-in-out',
-        zIndex: 1020
-      }}
     >
-      <nav className='container d-flex align-items-center justify-content-between py-3'>
+      <nav className='container flex items-center justify-between py-3'>
         <Link
           href='/'
           aria-label='Домой'
-          className='d-flex align-items-center text-decoration-none'
+          className='flex items-center no-underline'
         >
           <Image
             src={'/images/logo.png'}
@@ -33,10 +29,10 @@ export default function Header() {
             height={64}
           />
         </Link>
-        <h3 className='h4 fw-bold text-danger mb-0 text-center flex-grow-1'>
+        <h3 className='text-xl font-bold text-red-600 mb-0 text-center flex-grow'>
           Доска бесплатных объявлений
         </h3>
-        <div className='d-flex align-items-center'>
+        <div className='flex items-center'>
           <SignIn />
         </div>
       </nav>

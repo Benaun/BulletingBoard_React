@@ -1,1 +1,31 @@
 @import 'tailwindcss';
+
+/* Custom heart icon styles */
+.heart-icon {
+  transition: all 0.2s ease;
+}
+
+.heart-icon-empty {
+  color: #000;
+  -webkit-text-stroke: 1px #000;
+  -webkit-text-fill-color: #fff;
+}
+
+.heart-icon-filled {
+  color: #dc3545;
+  -webkit-text-stroke: none;
+  -webkit-text-fill-color: #dc3545;
+}
+
+.heart-icon-empty:hover {
+  -webkit-text-stroke: 1px #dc3545;
+  color: #dc3545;
+}
+
+/* Remove underlines from card links */
+.bullet-card a,
+.bullet-card a:hover,
+.bullet-card a:focus,
+.bullet-card a:visited {
+  text-decoration: none !important;
+}

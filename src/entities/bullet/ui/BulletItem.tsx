@@ -7,10 +7,7 @@ import toast from 'react-hot-toast'
 import { getCurrentBullet } from '@/shared/lib/getCurrentBullet'
 import { getCurrentUser } from '@/shared/lib/getCurrentUser'
 
-import {
-  useDeleteBulletMutation,
-  useFetchAllBulletsQuery
-} from '@/entities/bullet/api/service'
+import { useFetchAllBulletsQuery } from '@/entities/bullet/api/service'
 import type { Bullet } from '@/entities/bullet/model/schema'
 import {
   useFetchAllUsersQuery,
@@ -39,7 +36,6 @@ export default function BulletItem({ item }: BulletItemProps) {
     (favorite: Bullet) => favorite.id == currentBullet?.id
   )
   const [updateUserFavorites] = useUpdateUserFavoritesMutation()
-  const [deleteBullet] = useDeleteBulletMutation()
 
   const handleToggleFavorite = async () => {
     if (!currentBullet) {
@@ -77,78 +73,25 @@ export default function BulletItem({ item }: BulletItemProps) {
       )
   }
 
-  const handleDelete = async (id: number) => {
-    await deleteBullet(id)
-      .unwrap()
-      .then(() => toast.success('Объявление удалено!'))
-      .catch(() =>
-        toast.error('Возникла проблема с вашим запросом')
-      )
-  }
-
   return (
-    <div
-      className='bg-white border rounded position-relative overflow-hidden'
-      style={{
-        minHeight: '320px',
-        transition: 'all 0.2s ease',
-        cursor: 'pointer',
-        boxShadow: '0 1px 3px rgba(0,0,0,0.08)'
-      }}
-      onMouseEnter={e => {
-        e.currentTarget.style.boxShadow =
-          '0 4px 12px rgba(0,0,0,0.12)'
-        e.currentTarget.style.transform = 'translateY(-1px)'
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.boxShadow =
-          '0 1px 3px rgba(0,0,0,0.08)'
-        e.currentTarget.style.transform = 'translateY(0)'
-      }}
-    >
+    <div className='bullet-card bg-white border border-gray-200 rounded-lg relative overflow-hidden min-h-80 transition-all duration-200 ease-in-out cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-0.5'>
       <Link
         href={`/bullet/${id}`}
-        className='text-decoration-none'
+        className='no-underline hover:no-underline text-inherit hover:text-inherit'
       >
         {/* Изображение */}
-        <div
-          className='position-relative overflow-hidden'
-          style={{
-            height: '180px',
-            backgroundColor: '#f8f9fa'
-          }}
-        >
+        <div className='relative overflow-hidden h-44 bg-gray-50'>
           {image ? (
             <img
               src={image}
               alt={title || 'Объявление'}
-              className='w-100 h-100'
-              style={{
-                objectFit: 'cover',
-                transition: 'transform 0.3s ease'
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.transform = 'scale(1.02)'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.transform = 'scale(1)'
-              }}
+              className='w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-105'
             />
           ) : (
             <img
               src='images/not.jpg'
               alt='No photo'
-              className='w-100 h-100'
-              style={{
-                objectFit: 'cover',
-                transition: 'transform 0.3s ease'
-              }}
-              onMouseEnter={e => {
-                e.currentTarget.style.transform = 'scale(1.02)'
-              }}
-              onMouseLeave={e => {
-                e.currentTarget.style.transform = 'scale(1)'
-              }}
+              className='w-full h-full object-cover transition-transform duration-300 ease-in-out hover:scale-105'
             />
           )}
         </div>
@@ -156,23 +99,9 @@ export default function BulletItem({ item }: BulletItemProps) {
         {/* Контент карточки */}
         <div className='p-3'>
           {/* Название и кнопка избранного */}
-          <div className='d-flex align-items-start justify-content-between mb-2'>
+          <div className='flex items-start justify-between mb-2'>
             {/* Название */}
-            <div
-              className='lh-sm'
-              style={{
-                color: '#212529',
-                fontSize: '18px',
-                display: '-webkit-box',
-                WebkitBoxOrient: 'vertical',
-                WebkitLineClamp: 2,
-                overflow: 'hidden',
-                textOverflow: 'ellipsis',
-                minHeight: '34px',
-                flex: '1',
-                marginRight: '8px'
-              }}
-            >
+            <div className='leading-5 text-gray-900 text-lg line-clamp-2 min-h-8 flex-1 mr-2'>
               {title || 'Без названия'}
             </div>
 
@@ -181,107 +110,32 @@ export default function BulletItem({ item }: BulletItemProps) {
               role !== 'admin' &&
               String(ownerId) !== String(userId) && (
                 <button
-                  className='btn btn-sm d-flex align-items-center justify-content-center heart-button'
+                  className='text-xl border-none bg-transparent px-2.5 py-1.5 rounded-full transition-all duration-200 ease-in-out flex-shrink-0 flex items-center justify-center hover:bg-gray-100'
                   onClick={e => {
                     e.preventDefault()
                     e.stopPropagation()
                     handleToggleFavorite()
                   }}
-                  style={{
-                    fontSize: '20px',
-                    border: 'none',
-                    background: 'transparent',
-                    padding: '6px 10px',
-                    borderRadius: '50%',
-                    transition: 'all 0.2s ease',
-                    flexShrink: 0
-                  }}
                 >
                   <i
-                    className={`bi ${inFav ? 'bi-heart-fill' : 'bi-heart'}`}
-                    style={{
-                      color: inFav ? '#dc3545' : '#000',
-                      WebkitTextStroke: inFav
-                        ? 'none'
-                        : '1px #000',
-                      WebkitTextFillColor: inFav
-                        ? '#dc3545'
-                        : '#fff',
-                      transition: 'all 0.2s ease'
-                    }}
-                    onMouseEnter={e => {
-                      if (!inFav) {
-                        e.currentTarget.style.webkitTextStroke =
-                          '1px #dc3545'
-                        e.currentTarget.style.color = '#dc3545'
-                      }
-                    }}
-                    onMouseLeave={e => {
-                      if (!inFav) {
-                        e.currentTarget.style.webkitTextStroke =
-                          '1px #000'
-                        e.currentTarget.style.color = '#000'
-                      }
-                    }}
+                    className={`bi ${inFav ? 'bi-heart-fill' : 'bi-heart'} heart-icon ${inFav ? 'heart-icon-filled' : 'heart-icon-empty'}`}
                   ></i>
                 </button>
               )}
           </div>
 
           {/* Цена */}
-          <div
-            className='fw-bold mb-2'
-            style={{
-              color: '#495057',
-              fontSize: '18px',
-              lineHeight: '1.2'
-            }}
-          >
+          <div className='font-bold mb-2 text-gray-600 text-lg leading-tight'>
             {price ? `${price} ₽` : 'Цена не указана'}
           </div>
 
           {/* Местоположение */}
-          <div className='text-muted small d-flex align-items-center mb-3'>
-            <i
-              className='bi bi-geo-alt me-1'
-              style={{ fontSize: '12px' }}
-            ></i>
+          <div className='text-gray-500 text-sm flex items-center mb-3'>
+            <i className='bi bi-geo-alt mr-1 text-xs'></i>
             {city || 'Местоположение не указано'}
           </div>
         </div>
       </Link>
-
-      {/* Кнопки редактирования/удаления для владельца на странице профиля */}
-      {session &&
-        role !== 'admin' &&
-        typeof window !== 'undefined' &&
-        window.location.href ===
-          'http://localhost:3000/profile' &&
-        String(ownerId) === String(userId) && (
-          <div className='px-3 pb-3'>
-            <div className='d-flex justify-content-end gap-1'>
-              <button
-                className='btn btn-outline-danger btn-sm'
-                onClick={e => {
-                  e.preventDefault()
-                  e.stopPropagation()
-                  handleDelete(id)
-                }}
-                style={{ fontSize: '12px' }}
-              >
-                <i className='bi bi-trash'></i>
-              </button>
-              <Link
-                href={`/editBullet/${id}`}
-                className='btn btn-outline-primary btn-sm text-decoration-none'
-                onClick={e => e.stopPropagation()}
-                style={{ fontSize: '12px' }}
-              >
-                <i className='bi bi-pencil'></i>
-              </Link>
-            </div>
-          </div>
-        )}
     </div>
   )
 }

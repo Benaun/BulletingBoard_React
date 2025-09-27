@@ -18,8 +18,7 @@ export default function SignIn() {
           <Link href={'/admin'}>
             <FaCrown
               size={42}
-              cursor={'pointer'}
-              fill='rgb(185, 184, 182)'
+              className='cursor-pointer text-gray-400'
             />
           </Link>
         ) : (
@@ -27,14 +26,11 @@ export default function SignIn() {
             <Link href={'/profile'}>
               <FaUserCircle
                 size={42}
-                fill='rgb(185, 184, 182)'
+                className='text-gray-400'
               />
             </Link>
             <Link href={'/addBullet'}>
-              <Button
-                className='inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors text-white focus:outline-none focus:ring-2'
-                style={{ background: 'var(--color-primary)' }}
-              >
+              <Button className='inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors text-white focus:outline-none focus:ring-2 bg-blue-600 hover:bg-blue-700'>
                 Разместить объявление
               </Button>
             </Link>
@@ -56,10 +52,7 @@ export default function SignIn() {
       href={'#'}
       onClick={() => signIn(undefined, { callbackUrl: '/' })}
     >
-      <Button
-        className='inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors text-white focus:outline-none focus:ring-2'
-        style={{ background: 'var(--color-primary)' }}
-      >
+      <Button className='inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium transition-colors text-white focus:outline-none focus:ring-2 bg-blue-600 hover:bg-blue-700'>
         Войти
       </Button>
     </Link>
