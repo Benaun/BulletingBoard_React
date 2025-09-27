@@ -155,33 +155,89 @@ export default function BulletItem({ item }: BulletItemProps) {
 
         {/* Контент карточки */}
         <div className='p-3'>
+          {/* Название и кнопка избранного */}
+          <div className='d-flex align-items-start justify-content-between mb-2'>
+            {/* Название */}
+            <div
+              className='lh-sm'
+              style={{
+                color: '#212529',
+                fontSize: '18px',
+                display: '-webkit-box',
+                WebkitBoxOrient: 'vertical',
+                WebkitLineClamp: 2,
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                minHeight: '34px',
+                flex: '1',
+                marginRight: '8px'
+              }}
+            >
+              {title || 'Без названия'}
+            </div>
+
+            {/* Кнопка избранного */}
+            {session &&
+              role !== 'admin' &&
+              String(ownerId) !== String(userId) && (
+                <button
+                  className='btn btn-sm d-flex align-items-center justify-content-center heart-button'
+                  onClick={e => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    handleToggleFavorite()
+                  }}
+                  style={{
+                    fontSize: '20px',
+                    border: 'none',
+                    background: 'transparent',
+                    padding: '6px 10px',
+                    borderRadius: '50%',
+                    transition: 'all 0.2s ease',
+                    flexShrink: 0
+                  }}
+                >
+                  <i
+                    className={`bi ${inFav ? 'bi-heart-fill' : 'bi-heart'}`}
+                    style={{
+                      color: inFav ? '#dc3545' : '#000',
+                      WebkitTextStroke: inFav
+                        ? 'none'
+                        : '1px #000',
+                      WebkitTextFillColor: inFav
+                        ? '#dc3545'
+                        : '#fff',
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={e => {
+                      if (!inFav) {
+                        e.currentTarget.style.webkitTextStroke =
+                          '1px #dc3545'
+                        e.currentTarget.style.color = '#dc3545'
+                      }
+                    }}
+                    onMouseLeave={e => {
+                      if (!inFav) {
+                        e.currentTarget.style.webkitTextStroke =
+                          '1px #000'
+                        e.currentTarget.style.color = '#000'
+                      }
+                    }}
+                  ></i>
+                </button>
+              )}
+          </div>
+
           {/* Цена */}
           <div
             className='fw-bold mb-2'
             style={{
-              color: '#212529',
+              color: '#495057',
               fontSize: '18px',
               lineHeight: '1.2'
             }}
           >
             {price ? `${price} ₽` : 'Цена не указана'}
-          </div>
-
-          {/* Название */}
-          <div
-            className='mb-1 lh-sm'
-            style={{
-              color: '#495057',
-              fontSize: '14px',
-              display: '-webkit-box',
-              WebkitBoxOrient: 'vertical',
-              WebkitLineClamp: 2,
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              minHeight: '34px'
-            }}
-          >
-            {title || 'Без названия'}
           </div>
 
           {/* Местоположение */}
@@ -195,86 +251,37 @@ export default function BulletItem({ item }: BulletItemProps) {
         </div>
       </Link>
 
-      <div className='px-3 pb-3'>
-        {session && role !== 'admin' && (
-          <div className='d-flex align-items-center justify-content-between'>
-            {String(ownerId) !== String(userId) && (
+      {/* Кнопки редактирования/удаления для владельца на странице профиля */}
+      {session &&
+        role !== 'admin' &&
+        typeof window !== 'undefined' &&
+        window.location.href ===
+          'http://localhost:3000/profile' &&
+        String(ownerId) === String(userId) && (
+          <div className='px-3 pb-3'>
+            <div className='d-flex justify-content-end gap-1'>
               <button
-                className='btn btn-sm d-flex align-items-center justify-content-center heart-button'
+                className='btn btn-outline-danger btn-sm'
                 onClick={e => {
                   e.preventDefault()
                   e.stopPropagation()
-                  handleToggleFavorite()
+                  handleDelete(id)
                 }}
-                style={{
-                  fontSize: '20px',
-                  border: 'none',
-                  background: 'transparent',
-                  padding: '6px 10px',
-                  borderRadius: '50%',
-                  transition: 'all 0.2s ease'
-                }}
+                style={{ fontSize: '12px' }}
               >
-                <i
-                  className={`bi ${inFav ? 'bi-heart-fill' : 'bi-heart'}`}
-                  style={{
-                    color: inFav ? '#dc3545' : '#000',
-                    WebkitTextStroke: inFav
-                      ? 'none'
-                      : '1px #000',
-                    WebkitTextFillColor: inFav
-                      ? '#dc3545'
-                      : '#fff',
-                    transition: 'all 0.2s ease'
-                  }}
-                  onMouseEnter={e => {
-                    if (!inFav) {
-                      e.currentTarget.style.webkitTextStroke =
-                        '1px #dc3545'
-                      e.currentTarget.style.color = '#dc3545'
-                    }
-                  }}
-                  onMouseLeave={e => {
-                    if (!inFav) {
-                      e.currentTarget.style.webkitTextStroke =
-                        '1px #000'
-                      e.currentTarget.style.color = '#000'
-                    }
-                  }}
-                ></i>
+                <i className='bi bi-trash'></i>
               </button>
-            )}
-
-            {/* Кнопки редактирования/удаления для владельца на странице профиля */}
-            {typeof window !== 'undefined' &&
-              window.location.href ===
-                'http://localhost:3000/profile' &&
-              String(ownerId) === String(userId) && (
-                <div className='d-flex gap-1'>
-                  <button
-                    className='btn btn-outline-danger btn-sm'
-                    onClick={e => {
-                      e.preventDefault()
-                      e.stopPropagation()
-                      handleDelete(id)
-                    }}
-                    style={{ fontSize: '12px' }}
-                  >
-                    <i className='bi bi-trash'></i>
-                  </button>
-                  <Link
-                    href={`/editBullet/${id}`}
-                    className='btn btn-outline-primary btn-sm text-decoration-none'
-                    onClick={e => e.stopPropagation()}
-                    style={{ fontSize: '12px' }}
-                  >
-                    <i className='bi bi-pencil'></i>
-                  </Link>
-                </div>
-              )}
+              <Link
+                href={`/editBullet/${id}`}
+                className='btn btn-outline-primary btn-sm text-decoration-none'
+                onClick={e => e.stopPropagation()}
+                style={{ fontSize: '12px' }}
+              >
+                <i className='bi bi-pencil'></i>
+              </Link>
+            </div>
           </div>
         )}
-      </div>
     </div>
   )
 }

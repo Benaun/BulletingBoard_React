@@ -8,19 +8,6 @@ interface Props {
 export default function BulletList({ items }: Props) {
   return (
     <div className='container-fluid px-3'>
-      {/* Заголовок секции */}
-      <div className='d-flex align-items-center justify-content-between mb-4'>
-        <h2
-          className='h4 fw-bold mb-0'
-          style={{ color: '#1a1a1a' }}
-        >
-          Объявления
-        </h2>
-        <span className='text-muted small'>
-          {items?.length || 0} объявлений
-        </span>
-      </div>
-
       {/* Сетка объявлений в стиле Avito */}
       <div
         className='d-grid gap-3'
