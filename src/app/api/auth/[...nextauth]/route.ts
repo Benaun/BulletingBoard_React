@@ -16,14 +16,15 @@ async function getUsers(): Promise<AppUser[]> {
 }
 
 const authConfig: NextAuthOptions = {
+  debug: false,
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? '',
-      clientSecret: process.env.GOOGLE_SECRET ?? ''
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? ''
     }),
     GithubProvider({
       clientId: process.env.GITHUB_CLIENT_ID ?? '',
-      clientSecret: process.env.GITHUB_SECRET ?? ''
+      clientSecret: process.env.GITHUB_CLIENT_SECRET ?? ''
     }),
     Credentials({
       name: '',
@@ -36,24 +37,33 @@ const authConfig: NextAuthOptions = {
         }
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials.password)
+        if (!credentials?.email || !credentials.password) {
           return null
-        const users = await getUsers()
-        const currentUser = users?.find(
-          user => user.email === credentials.email
-        )
-        if (
-          currentUser &&
-          currentUser.password === credentials.password
-        ) {
-          return {
-            id: currentUser.id.toString(),
-            email: currentUser.email || '',
-            name: currentUser.name || '',
-            role: currentUser.role || 'user'
-          }
         }
-        return null
+
+        try {
+          const users = await getUsers()
+          const currentUser = users?.find(
+            user => user.email === credentials.email
+          )
+
+          if (
+            currentUser &&
+            currentUser.password === credentials.password
+          ) {
+            return {
+              id: String(currentUser.id),
+              email: currentUser.email || '',
+              name: currentUser.name || '',
+              role: currentUser.role || 'user'
+            }
+          }
+
+          return null
+        } catch (error) {
+          console.error('Authorization error:', error)
+          return null
+        }
       }
     })
   ],
@@ -68,7 +78,14 @@ const authConfig: NextAuthOptions = {
     async session({ session, token }) {
       if (!session?.user || !token) return session
 
-      const extendedUser = session.user as any
+      const extendedUser = session.user as {
+        id?: string
+        role?: string
+        name?: string | null
+        email?: string | null
+        image?: string | null
+      }
+
       if (token.sub) {
         extendedUser.id = token.sub
       }

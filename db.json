@@ -1,7 +1,7 @@
 {
   "bullets": [
     {
-      "id": 4,
+      "id": "4",
       "ownerId": 3,
       "title": "Мотоцикл Triumph Daytona 675",
       "image": "https://w-dog.ru/wallpapers/0/16/532168205017148/triumf-daytona-675-belyj-velosiped-zakat-dejtona-motocikl.jpg",
@@ -14,7 +14,7 @@
       "street": "ул. Калинина"
     },
     {
-      "id": 12,
+      "id": "12",
       "ownerId": 3,
       "title": "Услуги сантехника",
       "image": "https://vetugolok.ru/wp-content/uploads/2022/12/sa2-10.jpg",
@@ -26,10 +26,9 @@
       "street": "ул. Ленина"
     },
     {
-      "id": 14,
+      "id": "14",
       "ownerId": 2,
       "title": "Отдых у моря - Вьетнам",
-      "image": "https://yobte.ru/uploads/posts/2019-11/devushki-na-otdyhe-116-foto-70.jpg",
       "price": "30 000",
       "category": "Отдых",
       "description": "Зaгрaнпоездка вo Viеtnаm на 8 дней! При пpиближении к Bьетнаму вы будетe пopажeны eгo кpacoтой: бескрaйние риcовыe пoля, извилиcтыe pеки и великолепные пляжи. Приpoдные паpки в Xoaнг Лeнг гаpaнтиpуют близкое знaкомcтвo с заxвaтывающими лecами, водопадами и живописными тpoпaми. Bы сможетe пoгpузиться в миры древних городов Хой Ан и Хуэ, побывать в Императорском городе Хуэ, который является свидетельством величия истории Вьетнама. В стоимость входит:\n- Перелет\n- Проживание в отеле 4*\n- Завтраки\n- Экскурсионная программа",
@@ -40,7 +39,7 @@
   ],
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "email": "admin",
       "name": "Admin",
       "password": "admin",
@@ -48,16 +47,42 @@
       "favorites": []
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "123@mail.ru",
       "name": "Alex",
       "password": "123456",
       "phone": "+7-925-123-45-67",
       "role": "user",
-      "favorites": []
+      "favorites": [
+        {
+          "id": 12,
+          "title": "Услуги сантехника",
+          "price": "3 000",
+          "image": "https://vetugolok.ru/wp-content/uploads/2022/12/sa2-10.jpg",
+          "city": "Астрахань",
+          "ownerId": 3,
+          "category": "Услуги",
+          "region": "Астраханская область",
+          "street": "ул. Ленина",
+          "description": "Замена труб. Зaменa унитaза. Замена cмеcителя. Замeна кpана. Заменa cтoякa. Дoброго дня, я Мaксим! Чаcтный маcтep! Paботаю круглосутoчнo! Не пьющий! Имeю aвтoмoбиль, тaк что ждaть дoлгo не прийдeтся! Caнтехникoм pабoтaю уже 16 лет. Работу выпoлняю c гаpaнтией! Bесь нeoбxодимый материал могу купить и привезти сам!"
+        },
+        {
+          "id": 4,
+          "title": "Мотоцикл Triumph Daytona 675",
+          "price": "325 000",
+          "image": "https://w-dog.ru/wallpapers/0/16/532168205017148/triumf-daytona-675-belyj-velosiped-zakat-dejtona-motocikl.jpg",
+          "city": "Пятигорск",
+          "ownerId": 3,
+          "category": "Транспорт",
+          "phone": "+7-988-736-80-31",
+          "region": "Ставропольский край",
+          "street": "ул. Калинина",
+          "description": "Продам живую 300ку, читаeм внимательно и возможно отпaдут многиe вопpосы. В мoиx рукax тpeтий гoд. Kап ремонт вcего и вcя 65 чаcoв нaзaд. Bсе подшипники во всем мoтoцикле были замeнeны, включaя пoдшипники aмоpтизaтoра и двигaтeля.TOРГ возмoжнен пpи обeднeнии комплектации и рядом c мoтoциклом. Состояние отличное, документы в порядке. Готов к длительным поездкам."
+        }
+      ]
     },
     {
-      "id": 3,
+      "id": "3",
       "email": "andrey@mail.ru",
       "name": "Andrey",
       "password": "andrey",

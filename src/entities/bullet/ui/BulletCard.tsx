@@ -1,12 +1,22 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { Card, Col, Container, Row } from 'react-bootstrap'
+import toast from 'react-hot-toast'
 
+import { getCurrentBullet } from '@/shared/lib/getCurrentBullet'
+import { getCurrentUser } from '@/shared/lib/getCurrentUser'
+
+import { useFetchAllBulletsQuery } from '@/entities/bullet/api/service'
 import type { Bullet } from '@/entities/bullet/model/schema'
-import { useFetchUserQuery } from '@/entities/user/api/service'
+import {
+  useFetchAllUsersQuery,
+  useFetchUserQuery,
+  useUpdateUserFavoritesMutation
+} from '@/entities/user/api/service'
 
 interface Props {
   item?: Bullet | null
@@ -15,6 +25,7 @@ interface Props {
 export default function BulletCard({ item }: Props) {
   const [visible, setVisible] = useState(false)
   const router = useRouter()
+  const { data: session } = useSession()
 
   // Получаем данные продавца по ownerId
   const {
@@ -22,6 +33,59 @@ export default function BulletCard({ item }: Props) {
     isLoading: isSellerLoading,
     error: sellerError
   } = useFetchUserQuery(item?.ownerId)
+
+  // Логика избранного (как в BulletItem)
+  type SessionUser = { id?: string | number; role?: string }
+  const userId = (session?.user as SessionUser | undefined)?.id
+  const role = (session?.user as SessionUser | undefined)?.role
+  const { data: bullets } = useFetchAllBulletsQuery()
+  const { data: users } = useFetchAllUsersQuery()
+  const currentUser = getCurrentUser(users, userId)
+  const currentBullet = getCurrentBullet(bullets, item?.id)
+  const favoritesArray = currentUser?.favorites || []
+  const bulletInFav = favoritesArray?.find(
+    (favorite: Bullet) => favorite.id != currentBullet?.id
+  )
+  const inFav = favoritesArray?.some(
+    (favorite: Bullet) => favorite.id == currentBullet?.id
+  )
+  const [updateUserFavorites] = useUpdateUserFavoritesMutation()
+
+  const handleToggleFavorite = async () => {
+    if (!currentBullet) {
+      toast.error('Элемент не найден')
+      return
+    }
+    let updatedFavorites: Bullet[] = [...favoritesArray]
+    if (!inFav) {
+      updatedFavorites = [...updatedFavorites, currentBullet]
+    } else {
+      const list = (bullets as Bullet[]) || []
+      updatedFavorites = list.includes(currentBullet as Bullet)
+        ? updatedFavorites.filter(
+            (f: Bullet) => f.id !== (currentBullet as Bullet)?.id
+          )
+        : updatedFavorites.filter(
+            (f: Bullet) =>
+              f.id !== (bulletInFav as Bullet | undefined)?.id
+          )
+    }
+    await updateUserFavorites({
+      userId: userId as string | number,
+      favorites: updatedFavorites
+    })
+      .unwrap()
+      .then(() =>
+        toast.success(
+          !inFav
+            ? 'Добавлено в избранное!'
+            : 'Удалено из избранного!'
+        )
+      )
+      .catch(() =>
+        toast.error('Возникла проблема с вашим запросом')
+      )
+  }
 
   if (!item) {
     return (
@@ -323,9 +387,50 @@ export default function BulletCard({ item }: Props) {
 
               {/* Favorites and Share */}
               <div className='d-flex gap-2 mt-3'>
-                <button className='btn btn-outline-secondary flex-fill'>
-                  <i className='bi bi-heart'></i>
-                </button>
+                {/* Кнопка избранного - показываем только если НЕ владелец и авторизован */}
+                {session &&
+                role !== 'admin' &&
+                String(item?.ownerId) !== String(userId) ? (
+                  <button
+                    className='btn btn-outline-secondary flex-fill'
+                    onClick={handleToggleFavorite}
+                  >
+                    <i
+                      className={`bi ${inFav ? 'bi-heart-fill' : 'bi-heart'}`}
+                      style={{
+                        color: inFav ? '#dc3545' : '#000',
+                        WebkitTextStroke: inFav
+                          ? 'none'
+                          : '1px #000',
+                        WebkitTextFillColor: inFav
+                          ? '#dc3545'
+                          : '#fff',
+                        transition: 'all 0.2s ease'
+                      }}
+                      onMouseEnter={e => {
+                        if (!inFav) {
+                          e.currentTarget.style.webkitTextStroke =
+                            '1px #dc3545'
+                          e.currentTarget.style.color = '#dc3545'
+                        }
+                      }}
+                      onMouseLeave={e => {
+                        if (!inFav) {
+                          e.currentTarget.style.webkitTextStroke =
+                            '1px #000'
+                          e.currentTarget.style.color = '#000'
+                        }
+                      }}
+                    ></i>
+                  </button>
+                ) : (
+                  <button
+                    className='btn btn-outline-secondary flex-fill'
+                    disabled
+                  >
+                    <i className='bi bi-heart text-muted'></i>
+                  </button>
+                )}
                 <button className='btn btn-outline-secondary flex-fill'>
                   <i className='bi bi-share'></i>
                 </button>

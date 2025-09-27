@@ -9,7 +9,7 @@ export const userSchema = z.object({
       typeof val === 'string' ? parseInt(val, 10) : val
     ),
   name: z.string().optional(),
-  email: z.string().email().optional(),
+  email: z.string().optional(),
   password: z.string().optional(),
   phone: z.string().optional(),
   role: z.string().optional().default('user'),

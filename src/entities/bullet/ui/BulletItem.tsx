@@ -2,14 +2,10 @@
 
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import { Col, Container } from 'react-bootstrap'
 import toast from 'react-hot-toast'
 
 import { getCurrentBullet } from '@/shared/lib/getCurrentBullet'
 import { getCurrentUser } from '@/shared/lib/getCurrentUser'
-import DeleteBtn from '@/shared/ui/icon-buttons/DeleteBtn'
-import EditBtn from '@/shared/ui/icon-buttons/EditBtn'
-import HeartBtn from '@/shared/ui/icon-buttons/HeartBtn'
 
 import {
   useDeleteBulletMutation,
@@ -91,60 +87,194 @@ export default function BulletItem({ item }: BulletItemProps) {
   }
 
   return (
-    <Col xs={8} md={6} lg={4} xl={3} className='mb-3'>
-      <div
-        className='rounded-lg transition-shadow'
-        style={{
-          background: 'var(--color-surface)',
-          border: '1px solid var(--color-border)',
-          boxShadow: '0 1px 2px 0 rgb(0 0 0 / 0.06)'
-        }}
+    <div
+      className='bg-white border rounded position-relative overflow-hidden'
+      style={{
+        minHeight: '320px',
+        transition: 'all 0.2s ease',
+        cursor: 'pointer',
+        boxShadow: '0 1px 3px rgba(0,0,0,0.08)'
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.boxShadow =
+          '0 4px 12px rgba(0,0,0,0.12)'
+        e.currentTarget.style.transform = 'translateY(-1px)'
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.boxShadow =
+          '0 1px 3px rgba(0,0,0,0.08)'
+        e.currentTarget.style.transform = 'translateY(0)'
+      }}
+    >
+      <Link
+        href={`/bullet/${id}`}
+        className='text-decoration-none'
       >
-        <Container className='aspect-square overflow-hidden bg-gray-100 rounded-t-lg'>
+        {/* Изображение */}
+        <div
+          className='position-relative overflow-hidden'
+          style={{
+            height: '180px',
+            backgroundColor: '#f8f9fa'
+          }}
+        >
           {image ? (
             <img
               src={image}
-              alt={title || ''}
-              className='h-full w-full object-cover'
+              alt={title || 'Объявление'}
+              className='w-100 h-100'
+              style={{
+                objectFit: 'cover',
+                transition: 'transform 0.3s ease'
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = 'scale(1.02)'
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = 'scale(1)'
+              }}
             />
           ) : (
-            <div className='h-full w-full bg-gray-200' />
-          )}
-        </Container>
-        <div className='p-4'>
-          <Link href={`/bullet/${id}`}>
-            <h3 className='line-clamp-2 text-base font-semibold hover:text-primary'>
-              {title || 'Без названия'}
-            </h3>
-            <p className='mt-1 text-sm text-text'>
-              {price || 'Цена не указана'} &#8381;
-            </p>
-            <p className='text-sm text-text-muted'>
-              {city || 'Не указан'}
-            </p>
-          </Link>
-          {role === 'admin' || !session ? (
-            <div />
-          ) : ownerId !==
-            (userId as string | number | undefined) ? (
-            <HeartBtn
-              inFav={inFav}
-              handleClick={handleToggleFavorite}
+            <img
+              src='images/not.jpg'
+              alt='No photo'
+              className='w-100 h-100'
+              style={{
+                objectFit: 'cover',
+                transition: 'transform 0.3s ease'
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.transform = 'scale(1.02)'
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.transform = 'scale(1)'
+              }}
             />
-          ) : typeof window !== 'undefined' &&
-            window.location.href ==
-              'http://localhost:3000/profile' ? (
-            <div>
-              <DeleteBtn handleClick={() => handleDelete(id)} />
-              <Link href={`/editBullet/${id}`}>
-                <EditBtn size={20} handleClick={() => {}} />
-              </Link>
-            </div>
-          ) : (
-            <div />
           )}
         </div>
+
+        {/* Контент карточки */}
+        <div className='p-3'>
+          {/* Цена */}
+          <div
+            className='fw-bold mb-2'
+            style={{
+              color: '#212529',
+              fontSize: '18px',
+              lineHeight: '1.2'
+            }}
+          >
+            {price ? `${price} ₽` : 'Цена не указана'}
+          </div>
+
+          {/* Название */}
+          <div
+            className='mb-1 lh-sm'
+            style={{
+              color: '#495057',
+              fontSize: '14px',
+              display: '-webkit-box',
+              WebkitBoxOrient: 'vertical',
+              WebkitLineClamp: 2,
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+              minHeight: '34px'
+            }}
+          >
+            {title || 'Без названия'}
+          </div>
+
+          {/* Местоположение */}
+          <div className='text-muted small d-flex align-items-center mb-3'>
+            <i
+              className='bi bi-geo-alt me-1'
+              style={{ fontSize: '12px' }}
+            ></i>
+            {city || 'Местоположение не указано'}
+          </div>
+        </div>
+      </Link>
+
+      <div className='px-3 pb-3'>
+        {session && role !== 'admin' && (
+          <div className='d-flex align-items-center justify-content-between'>
+            {String(ownerId) !== String(userId) && (
+              <button
+                className='btn btn-sm d-flex align-items-center justify-content-center heart-button'
+                onClick={e => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                  handleToggleFavorite()
+                }}
+                style={{
+                  fontSize: '20px',
+                  border: 'none',
+                  background: 'transparent',
+                  padding: '6px 10px',
+                  borderRadius: '50%',
+                  transition: 'all 0.2s ease'
+                }}
+              >
+                <i
+                  className={`bi ${inFav ? 'bi-heart-fill' : 'bi-heart'}`}
+                  style={{
+                    color: inFav ? '#dc3545' : '#000',
+                    WebkitTextStroke: inFav
+                      ? 'none'
+                      : '1px #000',
+                    WebkitTextFillColor: inFav
+                      ? '#dc3545'
+                      : '#fff',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onMouseEnter={e => {
+                    if (!inFav) {
+                      e.currentTarget.style.webkitTextStroke =
+                        '1px #dc3545'
+                      e.currentTarget.style.color = '#dc3545'
+                    }
+                  }}
+                  onMouseLeave={e => {
+                    if (!inFav) {
+                      e.currentTarget.style.webkitTextStroke =
+                        '1px #000'
+                      e.currentTarget.style.color = '#000'
+                    }
+                  }}
+                ></i>
+              </button>
+            )}
+
+            {/* Кнопки редактирования/удаления для владельца на странице профиля */}
+            {typeof window !== 'undefined' &&
+              window.location.href ===
+                'http://localhost:3000/profile' &&
+              String(ownerId) === String(userId) && (
+                <div className='d-flex gap-1'>
+                  <button
+                    className='btn btn-outline-danger btn-sm'
+                    onClick={e => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      handleDelete(id)
+                    }}
+                    style={{ fontSize: '12px' }}
+                  >
+                    <i className='bi bi-trash'></i>
+                  </button>
+                  <Link
+                    href={`/editBullet/${id}`}
+                    className='btn btn-outline-primary btn-sm text-decoration-none'
+                    onClick={e => e.stopPropagation()}
+                    style={{ fontSize: '12px' }}
+                  >
+                    <i className='bi bi-pencil'></i>
+                  </Link>
+                </div>
+              )}
+          </div>
+        )}
       </div>
-    </Col>
+    </div>
   )
 }
