@@ -24,6 +24,7 @@ interface Props {
 
 export default function BulletCard({ item }: Props) {
   const [visible, setVisible] = useState(false)
+  const [needsBlurBg, setNeedsBlurBg] = useState(false)
   const router = useRouter()
   const { data: session } = useSession()
 
@@ -50,6 +51,25 @@ export default function BulletCard({ item }: Props) {
     (favorite: Bullet) => favorite.id == currentBullet?.id
   )
   const [updateUserFavorites] = useUpdateUserFavoritesMutation()
+
+  const handleImageLoad = (
+    e: React.SyntheticEvent<HTMLImageElement>
+  ) => {
+    const img = e.target as HTMLImageElement
+    const container = img.parentElement
+    if (container) {
+      const containerWidth = container.offsetWidth
+      const { naturalWidth, naturalHeight } = img
+
+      // Вычисляем ширину изображения при высоте контейнера
+      const containerHeight = container.offsetHeight
+      const scaledWidth =
+        (naturalWidth * containerHeight) / naturalHeight
+
+      // Если изображение уже контейнера, нужен размытый фон
+      setNeedsBlurBg(scaledWidth < containerWidth)
+    }
+  }
 
   const handleToggleFavorite = async () => {
     if (!currentBullet) {
@@ -151,11 +171,27 @@ export default function BulletCard({ item }: Props) {
           <Card className='mb-4 border-0'>
             <div className='relative overflow-hidden rounded h-96 bg-gray-50'>
               {image ? (
-                <img
-                  src={image}
-                  alt={title}
-                  className='w-full h-full object-cover'
-                />
+                <div className='relative w-full h-full flex items-center justify-center'>
+                  {/* Размытый фон если изображение узкое */}
+                  {needsBlurBg && (
+                    <div
+                      className='absolute inset-0 bg-cover bg-center'
+                      style={{
+                        backgroundImage: `url(${image})`,
+                        filter: 'blur(20px) brightness(0.7)',
+                        transform: 'scale(1.1)'
+                      }}
+                    />
+                  )}
+
+                  {/* Основное изображение */}
+                  <img
+                    src={image}
+                    alt={title}
+                    onLoad={handleImageLoad}
+                    className='h-full w-auto object-contain relative z-10'
+                  />
+                </div>
               ) : (
                 <div className='flex items-center justify-center h-full'>
                   <div className='text-center text-gray-500'>
