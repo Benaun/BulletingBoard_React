@@ -1,4 +1,5 @@
 ### Использовались следюущие технологии:
+
 - React
 - NextJS
 - NextAuth
@@ -6,11 +7,13 @@
 - React-Bootstrap
 
 ## Install
+
 - Install dependencies
   ```bash
   npm install
   ```
 - Создать локально файл .env.local (необходимо для работы NEXT-auth)
+
   ```bash
     GOOGLE_CLIENT_ID= "ВАШ GOOGLE_CLIENT_ID"
     GOOGLE_SECRET= "ВАШ GOOGLE_SECRET"
@@ -23,8 +26,7 @@
   ```
 
 ## RUN
-  ```bash
-  npm run serv
-  ```
 
-
+```bash
+npm run serv
+```
