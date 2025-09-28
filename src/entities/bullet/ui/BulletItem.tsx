@@ -74,13 +74,13 @@ export default function BulletItem({ item }: BulletItemProps) {
   }
 
   return (
-    <div className='bullet-card bg-white border border-gray-200 rounded-lg relative overflow-hidden min-h-80 transition-all duration-200 ease-in-out cursor-pointer shadow-sm hover:shadow-md hover:-translate-y-0.5'>
+    <div className='bullet-card bg-white rounded-t-lg relative overflow-hidden h-[360px] transition-all duration-200 ease-in-out cursor-pointer hover:-translate-y-0.5'>
       <Link
         href={`/bullet/${id}`}
         className='no-underline hover:no-underline text-inherit hover:text-inherit'
       >
         {/* Изображение */}
-        <div className='relative overflow-hidden h-44 bg-gray-50'>
+        <div className='relative rounded-b-lg overflow-hidden h-[240px] bg-gray-50'>
           {image ? (
             <img
               src={image}
@@ -97,7 +97,7 @@ export default function BulletItem({ item }: BulletItemProps) {
         </div>
 
         {/* Контент карточки */}
-        <div className='p-3'>
+        <div className='p-3 flex flex-col justify-between h-[110px]'>
           {/* Название и кнопка избранного */}
           <div className='flex items-start justify-between mb-2'>
             {/* Название */}
@@ -124,15 +124,18 @@ export default function BulletItem({ item }: BulletItemProps) {
               )}
           </div>
 
-          {/* Цена */}
-          <div className='font-bold mb-2 text-gray-600 text-lg leading-tight'>
-            {price ? `${price} ₽` : 'Цена не указана'}
-          </div>
+          {/* Цена и местоположение */}
+          <div className='flex flex-col gap-1'>
+            {/* Цена */}
+            <div className='font-bold text-gray-600 text-lg leading-tight'>
+              {price ? `${price} ₽` : 'Цена не указана'}
+            </div>
 
-          {/* Местоположение */}
-          <div className='text-gray-500 text-sm flex items-center mb-3'>
-            <i className='bi bi-geo-alt mr-1 text-xs'></i>
-            {city || 'Местоположение не указано'}
+            {/* Местоположение */}
+            <div className='text-gray-500 text-sm flex items-center'>
+              <i className='bi bi-geo-alt mr-1 text-xs'></i>
+              {city || 'Местоположение не указано'}
+            </div>
           </div>
         </div>
       </Link>
