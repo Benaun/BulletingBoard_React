@@ -3,13 +3,13 @@
 import { useState } from 'react'
 import { Container } from 'react-bootstrap'
 
-import CategoriesList from '@/features/categories/ui/CategoriesList'
-
 import { useSearch } from '@/shared/contexts/useSearch'
 
 import { useFetchAllBulletsQuery } from '@/entities/bullet/api/service'
 import type { Bullet } from '@/entities/bullet/model/schema'
 import BulletList from '@/entities/bullet/ui/BulletList'
+import categories from '@/entities/category/model/categories'
+import CategoriesList from '@/entities/category/ui/CategoriesList'
 
 export default function BulletBoard() {
   const { searchValue, setSearchValue } = useSearch()
@@ -19,14 +19,52 @@ export default function BulletBoard() {
   }) => boolean
   const [filterFunction, setfilterFunction] =
     useState<ListFilter>(() => () => true)
+  const [selectedCategoryIds, setSelectedCategoryIds] = useState<
+    number[]
+  >([])
+
   const {
     data: bullets,
     isLoading,
     error
   } = useFetchAllBulletsQuery()
 
-  const handleSearchValue = (value: string) => {
-    setSearchValue(value)
+  const handleCategorySelect = (categoryIds: number[]) => {
+    setSelectedCategoryIds(categoryIds)
+
+    // Простой маппинг категорий
+    const categoryMapping: Record<string, string> = {
+      Авто: 'Транспорт',
+      Недвижимость: 'Недвижимость',
+      Работа: 'Работа',
+      'Одежда, обувь, аксессуары': 'Одежда и обувь',
+      'Хобби и отдых': 'Отдых',
+      Животные: 'Животные',
+      'Готовый бизнес и оборудование': 'Бизнес',
+      Услуги: 'Услуги',
+      Электроника: 'Электроника',
+      'Для дома и дачи': 'Для дома и дачи',
+      Запчасти: 'Запчасти',
+      'Товары для детей': 'Детские товары',
+      'Жильё для путешествия': 'Путешествия',
+      'Красота и здоровье': 'Красота'
+    }
+
+    // Если не выбрано ни одной категории, показываем все объявления
+    if (categoryIds.length === 0) {
+      setfilterFunction(() => () => true)
+      return
+    }
+
+    // Получаем названия выбранных категорий из базы данных
+    const selectedCategories = categoryIds
+      .map(id => categories.find(cat => cat.id === id)?.name)
+      .filter(Boolean)
+      .map(name => categoryMapping[name as string] || name)
+
+    setfilterFunction(() => (el: { category?: string }) => {
+      return selectedCategories.includes(el.category || '')
+    })
   }
 
   if (isLoading) {
@@ -72,38 +110,26 @@ export default function BulletBoard() {
     )
   }
 
-  const filtered = bullets
-    ?.filter(filterFunction)
-    .filter((bullet: Bullet) =>
+  // Сначала фильтруем по поиску по всем объявлениям
+  const searchFiltered =
+    bullets?.filter((bullet: Bullet) =>
       bullet.title
         .toLowerCase()
         .includes(searchValue.toLowerCase())
-    )
+    ) || []
 
-  async function onClick(evt: React.MouseEvent<HTMLDivElement>) {
-    const source = (evt.target as HTMLElement).closest(
-      'button[data-action]'
-    ) as HTMLButtonElement | null
-    if (source) {
-      const { action } = source.dataset
-      if (action == 'Все') {
-        setfilterFunction(() => () => true)
-      } else {
-        setfilterFunction(
-          () => (el: { category?: string }) =>
-            el.category == action
-        )
-      }
-    }
-  }
+  // Затем применяем фильтр по категориям к результатам поиска
+  const filtered = searchFiltered.filter(filterFunction)
+
   return (
     <Container fluid className='mt-4'>
       <main className='min-h-[80.4vh]'>
-        <div onClick={onClick}>
-          <div>
-            <CategoriesList />
-            <BulletList items={filtered} />
-          </div>
+        <div>
+          <CategoriesList
+            onCategorySelect={handleCategorySelect}
+            selectedCategoryIds={selectedCategoryIds}
+          />
+          <BulletList items={filtered} />
         </div>
       </main>
     </Container>
