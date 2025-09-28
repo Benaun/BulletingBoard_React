@@ -5,7 +5,7 @@ import { Container } from 'react-bootstrap'
 
 import { useSearch } from '@/shared/contexts/useSearch'
 
-import { useFetchAllBulletsQuery } from '@/entities/bullet/api/service'
+import { useInfiniteBulletsQuery } from '@/entities/bullet/api/service'
 import type { Bullet } from '@/entities/bullet/model/schema'
 import BulletList from '@/entities/bullet/ui/BulletList'
 import { categoryMapping } from '@/entities/category/lib/categoryMapping'
@@ -13,13 +13,7 @@ import categories from '@/entities/category/model/categories'
 import CategoriesList from '@/entities/category/ui/CategoriesList'
 
 export default function BulletBoard() {
-  const { searchValue, setSearchValue } = useSearch()
-  type ListFilter = (b: {
-    category?: string
-    title: string
-  }) => boolean
-  const [filterFunction, setfilterFunction] =
-    useState<ListFilter>(() => () => true)
+  const { searchValue } = useSearch()
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<
     number[]
   >([])
@@ -27,28 +21,37 @@ export default function BulletBoard() {
   const {
     data: bullets,
     isLoading,
+    isFetchingNextPage,
+    hasNextPage,
+    fetchNextPage,
     error
-  } = useFetchAllBulletsQuery()
+  } = useInfiniteBulletsQuery()
 
   const handleCategorySelect = (categoryIds: number[]) => {
     setSelectedCategoryIds(categoryIds)
-
-    // Если не выбрано ни одной категории, показываем все объявления
-    if (categoryIds.length === 0) {
-      setfilterFunction(() => () => true)
-      return
-    }
-
-    // Получаем названия выбранных категорий из базы данных
-    const selectedCategories = categoryIds
-      .map(id => categories.find(cat => cat.id === id)?.name)
-      .filter(Boolean)
-      .map(name => categoryMapping[name as string] || name)
-
-    setfilterFunction(() => (el: { category?: string }) => {
-      return selectedCategories.includes(el.category || '')
-    })
   }
+
+  // Фильтрация объявлений
+  const filteredBullets =
+    bullets?.filter((bullet: Bullet) => {
+      // Фильтр по поиску
+      const matchesSearch = bullet.title
+        .toLowerCase()
+        .includes(searchValue.toLowerCase())
+
+      if (!matchesSearch) return false
+
+      // Если не выбрано ни одной категории, показываем все объявления
+      if (selectedCategoryIds.length === 0) return true
+
+      // Фильтр по категориям
+      const selectedCategories = selectedCategoryIds
+        .map(id => categories.find(cat => cat.id === id)?.name)
+        .filter(Boolean)
+        .map(name => categoryMapping[name as string] || name)
+
+      return selectedCategories.includes(bullet.category || '')
+    }) || []
 
   if (isLoading) {
     return (
@@ -93,17 +96,6 @@ export default function BulletBoard() {
     )
   }
 
-  // Сначала фильтруем по поиску по всем объявлениям
-  const searchFiltered =
-    bullets?.filter((bullet: Bullet) =>
-      bullet.title
-        .toLowerCase()
-        .includes(searchValue.toLowerCase())
-    ) || []
-
-  // Затем применяем фильтр по категориям к результатам поиска
-  const filtered = searchFiltered.filter(filterFunction)
-
   return (
     <Container fluid className='mt-4'>
       <main className='min-h-[80.4vh]'>
@@ -112,7 +104,12 @@ export default function BulletBoard() {
             onCategorySelect={handleCategorySelect}
             selectedCategoryIds={selectedCategoryIds}
           />
-          <BulletList items={filtered} />
+          <BulletList
+            items={filteredBullets}
+            hasNextPage={hasNextPage}
+            isFetchingNextPage={isFetchingNextPage}
+            fetchNextPage={fetchNextPage}
+          />
         </div>
       </main>
     </Container>

@@ -1,4 +1,5 @@
 import {
+  useInfiniteQuery,
   useMutation,
   useQuery,
   useQueryClient
@@ -25,6 +26,41 @@ export function useFetchAllBulletsQuery() {
   return {
     data: query.data,
     isLoading: query.isLoading,
+    error: query.error
+  }
+}
+
+export function useInfiniteBulletsQuery() {
+  const query = useInfiniteQuery({
+    queryKey: ['bullets', 'infinite'],
+    queryFn: async ({ pageParam = 0 }) => {
+      const limit = 12
+      const offset = pageParam * limit
+
+      // Получаем все данные и делаем пагинацию на клиенте
+      // В реальном проекте это должно быть на сервере
+      const allBullets = bulletsSchema.parse(
+        await httpGet('/bullets')
+      )
+
+      const hasNextPage = offset + limit < allBullets.length
+
+      return {
+        data: allBullets.slice(offset, offset + limit),
+        hasNextPage,
+        nextPageParam: hasNextPage ? pageParam + 1 : undefined
+      }
+    },
+    getNextPageParam: lastPage => lastPage.nextPageParam,
+    initialPageParam: 0
+  })
+
+  return {
+    data: query.data?.pages.flatMap(page => page.data) || [],
+    isLoading: query.isLoading,
+    isFetchingNextPage: query.isFetchingNextPage,
+    hasNextPage: query.hasNextPage,
+    fetchNextPage: query.fetchNextPage,
     error: query.error
   }
 }
