@@ -8,6 +8,7 @@ import { useSearch } from '@/shared/contexts/useSearch'
 import { useFetchAllBulletsQuery } from '@/entities/bullet/api/service'
 import type { Bullet } from '@/entities/bullet/model/schema'
 import BulletList from '@/entities/bullet/ui/BulletList'
+import { categoryMapping } from '@/entities/category/lib/categoryMapping'
 import categories from '@/entities/category/model/categories'
 import CategoriesList from '@/entities/category/ui/CategoriesList'
 
@@ -31,24 +32,6 @@ export default function BulletBoard() {
 
   const handleCategorySelect = (categoryIds: number[]) => {
     setSelectedCategoryIds(categoryIds)
-
-    // Простой маппинг категорий
-    const categoryMapping: Record<string, string> = {
-      Авто: 'Транспорт',
-      Недвижимость: 'Недвижимость',
-      Работа: 'Работа',
-      'Одежда, обувь, аксессуары': 'Одежда и обувь',
-      'Хобби и отдых': 'Отдых',
-      Животные: 'Животные',
-      'Готовый бизнес и оборудование': 'Бизнес',
-      Услуги: 'Услуги',
-      Электроника: 'Электроника',
-      'Для дома и дачи': 'Для дома и дачи',
-      Запчасти: 'Запчасти',
-      'Товары для детей': 'Детские товары',
-      'Жильё для путешествия': 'Путешествия',
-      'Красота и здоровье': 'Красота'
-    }
 
     // Если не выбрано ни одной категории, показываем все объявления
     if (categoryIds.length === 0) {

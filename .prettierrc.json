@@ -12,7 +12,6 @@
   "printWidth": 65,
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
-    "^@/components/(.*)$",
     "^@/features/(.*)$",
     "^@/shared/(.*)$",
     "^@/app/(.*)$",
